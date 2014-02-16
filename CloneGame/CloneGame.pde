@@ -1,6 +1,7 @@
 void setup()
 {
   size(400,300);
+  player = new Player(10,10)
   frameRate(FRAMERATE);
 }
 
@@ -35,14 +36,10 @@ void draw()
       cloneMap.get(i).drawClone();
     }
   }
-  
+  player.updatePlayer();
+  println(player.posX);
   player.drawPlayer();
 }   
-
-void mousePressed()
-{
-  background(255,0,0);
-}
 
 
   
