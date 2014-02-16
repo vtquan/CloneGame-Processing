@@ -16,8 +16,8 @@ class Clone{
   
   void updateClone(HashMap<Integer,Integer> mousePosX, HashMap<Integer,Integer> mousePosY)
   {
-    this.posX = mousePosX.get(frameCount - frameOfCreation);
-    this.posY = mousePosY.get(frameCount - frameOfCreation);
+    posX = mousePosX.get(frameCount - frameOfCreation);
+    posY = mousePosY.get(frameCount - frameOfCreation);
   }
   
   void drawClone()

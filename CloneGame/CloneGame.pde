@@ -15,27 +15,25 @@ void draw()
   }
   else if(player.posY < 20 && crossed == false)
   {
-    line(0,20,width,20);
+    line(0,20,width,20);  //start line for clone to appear
   }
   
   if(crossed)
   {
-  frameElapsed = frameCount - startingFrame;
-    mousePosX.put(frameElapsed, mouseX);
-    mousePosY.put(frameElapsed, mouseY);
+    frameElapsed = frameCount - startingFrame;
+    playerPosX.put(frameElapsed, player.posX);
+    playerPosY.put(frameElapsed, player.posY);
     
     //creating a clone every DELAY frame
     if((((frameElapsed) % 60) == 0) && frameCount >= (startingFrame+DELAY*FRAMERATE))
     {      
-      if(numClone < 10) {
-        cloneMap.put(numClone, new Clone(mousePosX.get(frameElapsed),mousePosX.get(frameElapsed),10,10,frameCount));
-        numClone++;
-      }
+      cloneMap.put(numClone, new Clone(playerPosX.get(frameElapsed),playerPosX.get(frameElapsed),10,10,frameCount));
+      numClone++;
     }
     
     for(int i = 0; i < numClone; i++)
     {
-      cloneMap.get(i).updateClone(mousePosX, mousePosY);
+      cloneMap.get(i).updateClone(playerPosX, playerPosY);
       cloneMap.get(i).drawClone();
     }
   }

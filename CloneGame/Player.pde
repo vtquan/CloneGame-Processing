@@ -17,6 +17,24 @@ class Player{
       posX += getSpeedX(posX, posY);
       posY += getSpeedY(posX, posY);
     }
+
+    // Check borders
+    if (trans2D.X < BORDER_OFFSET)
+    {
+        trans2D.X = BORDER_OFFSET;
+    }
+    else if (trans2D.X > WaveServices.Platform.ScreenWidth - BORDER_OFFSET)
+    {
+        trans2D.X = WaveServices.Platform.ScreenWidth - BORDER_OFFSET;
+    }
+    if (trans2D.Y < BORDER_OFFSET)
+    {
+        trans2D.Y = BORDER_OFFSET;
+    }
+    else if (trans2D.Y > WaveServices.Platform.ScreenHeight - BORDER_OFFSET)
+    {
+        trans2D.Y = WaveServices.Platform.ScreenHeight - BORDER_OFFSET;
+    }
   }
   
   void drawPlayer()
