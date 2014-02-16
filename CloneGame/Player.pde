@@ -1,7 +1,7 @@
 class Player{
   int SPEED = 10;
-  int posX = 100;
-  int posY = 100;
+  int posX = width/2;
+  int posY = 10;
   int objWidth;
   int objHeight;
   

@@ -1,18 +1,21 @@
 void setup()
 {
   size(400,300);
-  player = new Player(10,10)
+  player = new Player(10,10);
   frameRate(FRAMERATE);
 }
 
 void draw()
 {
   background(255);
-  line(0,20,width,20);
-  if(mouseY > 20 && crossed == false)
+  if(player.posY > 20 && crossed == false)
   {
     crossed = true;
     startingFrame = frameCount;
+  }
+  else if(player.posY < 20 && crossed == false)
+  {
+    line(0,20,width,20);
   }
   
   if(crossed)
