@@ -38,7 +38,6 @@ void draw()
     }
   }
   player.updatePlayer();
-  println(player.posX);
   player.drawPlayer();
 }   
 

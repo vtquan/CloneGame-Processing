@@ -19,21 +19,21 @@ class Player{
     }
 
     // Check borders
-    if (trans2D.X < BORDER_OFFSET)
+    if (posX < objWidth/2)
     {
-        trans2D.X = BORDER_OFFSET;
+        posX = objWidth/2;
     }
-    else if (trans2D.X > WaveServices.Platform.ScreenWidth - BORDER_OFFSET)
+    else if (posX > width - objWidth/2)
     {
-        trans2D.X = WaveServices.Platform.ScreenWidth - BORDER_OFFSET;
+        posX = width - objWidth/2;
     }
-    if (trans2D.Y < BORDER_OFFSET)
+    if (posY < objHeight/2)
     {
-        trans2D.Y = BORDER_OFFSET;
+        posY = objHeight/2;
     }
-    else if (trans2D.Y > WaveServices.Platform.ScreenHeight - BORDER_OFFSET)
+    else if (posY > height - objHeight/2)
     {
-        trans2D.Y = WaveServices.Platform.ScreenHeight - BORDER_OFFSET;
+        posY = height - objHeight/2;
     }
   }
   
