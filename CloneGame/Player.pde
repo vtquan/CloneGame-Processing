@@ -23,17 +23,17 @@ class Player{
     {
         posX = objWidth/2;
     }
-    else if (posX > width - objWidth/2)
+    else if (posX >= width-1 - objWidth/2)
     {
-        posX = width - objWidth/2;
+        posX = width-1 - objWidth/2;
     }
     if (posY < objHeight/2)
     {
         posY = objHeight/2;
     }
-    else if (posY > height - objHeight/2)
+    else if (posY >= height-1 - objHeight/2)
     {
-        posY = height - objHeight/2;
+        posY = height-1 - objHeight/2;
     }
   }
   

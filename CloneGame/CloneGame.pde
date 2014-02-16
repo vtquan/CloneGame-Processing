@@ -1,8 +1,8 @@
 void setup()
 {
-  size(400,300);
+  size(GAMEWIDTH,GAMEHEIGHT);
   player = new Player(10,10);
-  frameRate(FRAMERATE);
+  frameRate(25);
 }
 
 void draw()
@@ -39,7 +39,59 @@ void draw()
   }
   player.updatePlayer();
   player.drawPlayer();
-}   
+  
+  if(checkDetection())
+  {
+    println("score:" +frameElapsed);
+    resetGame();
+  }
+} 
+
+void resetGame()
+{
+  player = new Player(10,10);
+  crossed = false;
+  playerPosX = new HashMap<Integer,Integer>();
+  playerPosY = new HashMap<Integer,Integer>();
+  cloneMap = new HashMap<Integer,Clone>();
+  numClone = 0;
+}
+
+boolean checkDetection()
+{
+  PGraphics pg = createGraphics(GAMEWIDTH,GAMEHEIGHT);
+  boolean result = false;
+  pg.beginDraw();
+  pg.background(255);
+  color c = color(0);
+  
+  for(int i = 0; i < numClone; i++)
+  {
+    cloneMap.get(i).drawClone(pg);
+  }
+  
+  //checking the 4 corner of the player to see if the pixel is not the same as background
+  pg.loadPixels();
+  if(pg.get(player.posX - int(player.objWidth/2), player.posY - int(player.objHeight/2)) == c)  //check top left corner of player
+  {
+    result = true;
+  }
+  else if(pg.get(player.posX - int(player.objWidth/2), player.posY + int(player.objHeight/2)) == c)  //check top right corner of player
+  {
+    result = true;
+  }
+  else if(pg.get(player.posX + int(player.objWidth/2), player.posY - int(player.objHeight/2)) == c)  //check bottom left corner of player
+  {
+    result = true;
+  }
+  else if(pg.get(player.posX + int(player.objWidth/2), player.posY + int(player.objHeight/2)) == c)  //check bottom right corner of player
+  {
+    result = true;
+  }
+  pg.endDraw();
+  return result;
+}
+
 
 
   
