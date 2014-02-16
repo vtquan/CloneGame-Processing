@@ -30,19 +30,9 @@ class Clone{
   
   void drawClone(PGraphics pg)  //draw clone to an offscreen image buffer
   {
-    rectMode(CENTER);
-    stroke(0);
-    fill(0);
+    pg.rectMode(CENTER);
+    pg.stroke(0);
+    pg.fill(0);
     pg.rect(posX,posY,objWidth,objHeight);
-  }
-  
-  boolean checkDetection()
-  {
-    if(posX + objWidth/2 >= mouseX && posX - objWidth/2 <= mouseX) {
-      if(posY + objHeight/2 >= mouseY && posY - objHeight/2 <= mouseY) {
-        return true;
-      }
-    }
-    return false;   
   }
 }

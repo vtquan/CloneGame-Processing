@@ -43,7 +43,7 @@ void draw()
   if(checkDetection())
   {
     println("score:" +frameElapsed);
-    resetGame();
+    //resetGame();
   }
 } 
 
@@ -71,7 +71,6 @@ boolean checkDetection()
   }
   
   //checking the 4 corner of the player to see if the pixel is not the same as background
-  pg.loadPixels();
   if(pg.get(player.posX - int(player.objWidth/2), player.posY - int(player.objHeight/2)) == c)  //check top left corner of player
   {
     result = true;
