@@ -1,5 +1,5 @@
 class Player{
-  int SPEED = 10;
+  int SPEED = 5;
   int posX = width/2;
   int posY = 10;
   int objWidth;

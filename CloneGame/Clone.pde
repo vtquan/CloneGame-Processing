@@ -3,6 +3,8 @@ class Clone{
   int posY;
   int objWidth;
   int objHeight;
+  final color STROKE = color(72,0,124);
+  final color FILL = color(72,0,124);
   int frameOfCreation;  //frame that clone object is created on
   
   Clone(int posX,int posY,int objWidth,int objHeight, int frameOfCreation)
@@ -23,16 +25,16 @@ class Clone{
   void drawClone()
   {
     rectMode(CENTER);
-    stroke(0);
-    fill(0);
+    stroke(STROKE);
+    fill(FILL);
     rect(posX,posY,objWidth,objHeight);
   }
   
   void drawClone(PGraphics pg)  //draw clone to an offscreen image buffer
   {
     pg.rectMode(CENTER);
-    pg.stroke(0);
-    pg.fill(0);
+    pg.stroke(STROKE);
+    pg.fill(FILL);
     pg.rect(posX,posY,objWidth,objHeight);
   }
 }
