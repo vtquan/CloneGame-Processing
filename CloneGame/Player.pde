@@ -4,6 +4,13 @@ class Player{
   int posY = 10;
   int objWidth;
   int objHeight;
+  HashMap<Integer,Integer> savedPosX = new HashMap<Integer,Integer>();
+  HashMap<Integer,Integer> savedPosY = new HashMap<Integer,Integer>();
+  
+  Player() {
+    this.objWidth = 10;
+    this.objHeight = 10;
+  }
   
   Player(int objWidth, int objHeight) {
     this.objWidth = objWidth;

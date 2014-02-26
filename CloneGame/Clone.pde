@@ -1,25 +1,30 @@
 class Clone{
   int posX;
   int posY;
-  int objWidth;
-  int objHeight;
+  int objWidth = 10;
+  int objHeight = 10;
   final color STROKE = color(72,0,124);
   final color FILL = color(72,0,124);
   int frameOfCreation;  //frame that clone object is created on
   
-  Clone(int posX,int posY,int objWidth,int objHeight, int frameOfCreation)
+  Clone(int frameOfCreation)
   {
-    this.posX = posX;
-    this.posY = posY;
-    this.objWidth = objWidth;
-    this.objHeight = objHeight;
+    posX = 0;
+    posY = 0;
     this.frameOfCreation = frameOfCreation;
   }
   
-  void updateClone(HashMap<Integer,Integer> mousePosX, HashMap<Integer,Integer> mousePosY)
+  Clone(int posX,int posY, int frameOfCreation)
   {
-    posX = mousePosX.get(frameCount - frameOfCreation);
-    posY = mousePosY.get(frameCount - frameOfCreation);
+    this.posX = posX;
+    this.posY = posY;
+    this.frameOfCreation = frameOfCreation;
+  }
+  
+  void updateClone(HashMap<Integer,Integer> savedPosX, HashMap<Integer,Integer> savedPosY)
+  {
+    posX = savedPosX.get(frameCount - frameOfCreation);
+    posY = savedPosY.get(frameCount - frameOfCreation);
   }
   
   void drawClone()
