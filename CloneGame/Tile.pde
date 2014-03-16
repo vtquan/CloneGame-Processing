@@ -1,57 +1,22 @@
-class CloneMap{
-  HashMap<Integer,Clone> cloneMap;
-  Player source;
-  int numClone;
+class Tile {
+  int posX;
+  int posY;
+  int objWidth;
+  int objHeight;
+  final color STROKE;
+  final color FILL;
   
-  CloneMap(Player source)
+  Tile()
   {
-    this.source = source;
-    cloneMap = new HashMap<Integer,Clone>();
-    numClone = 0;
+    STROKE = color(0);
+    FILL = color(0);
+    posX = 0;
+    posY = 0;
+    objWidth = 50;
+    objHeight = 50;
   }
   
-  void addClone()
-  {
-    cloneMap.put(numClone, new Clone(source));
-    numClone++;
-  }
-  
-  void updateMap(HashMap<Integer,Integer> savedPosX, HashMap<Integer,Integer> savedPosY)
-  {
-    for (int i = 0; i < numClone; i++)
-    {
-      cloneMap.get(i).updateClone();
-    }
-  }
-  
-  void drawMap()
-  {
-    for (int i = 0; i < numClone; i++)
-    {
-      cloneMap.get(i).drawClone();
-    }
-  }
-  
-  void drawMap(PGraphics pg)
-  {
-    for (int i = 0; i < numClone; i++)
-    {
-      cloneMap.get(i).drawClone(pg);
-    }
-  }
-  
-  color getFill()
-  {
-    Clone clone = new Clone();
-    return clone.FILL;
-  }
-  
-  int getNumClone()
-  {
-    return numClone;
-  }
-  
-  boolean checkDetection(Player player)
+  checkCollision(Player player)
   {
     PGraphics pg = createGraphics(game.GAMEWIDTH,game.GAMEHEIGHT);
     boolean result = false;

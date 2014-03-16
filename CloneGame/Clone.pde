@@ -6,25 +6,27 @@ class Clone{
   final color STROKE = color(72,0,124);
   final color FILL = color(72,0,124);
   int frameOfCreation;  //frame that clone object is created on
+  Player source;  //the player that the clone follow
   
-  Clone(int frameOfCreation)
+  Clone()
   {
     posX = 0;
     posY = 0;
     this.frameOfCreation = frameOfCreation;
   }
   
-  Clone(int posX,int posY, int frameOfCreation)
+  Clone(Player source)
   {
-    this.posX = posX;
-    this.posY = posY;
-    this.frameOfCreation = frameOfCreation;
+    this.source = source;
+    this.posX = 0;
+    this.posY = 0;
+    this.frameOfCreation = frameCount;
   }
   
-  void updateClone(HashMap<Integer,Integer> savedPosX, HashMap<Integer,Integer> savedPosY)
+  void updateClone()
   {
-    posX = savedPosX.get(frameCount - frameOfCreation);
-    posY = savedPosY.get(frameCount - frameOfCreation);
+    posX = source.savedPosX.get(frameCount - frameOfCreation);
+    posY = source.savedPosY.get(frameCount - frameOfCreation);
   }
   
   void drawClone()

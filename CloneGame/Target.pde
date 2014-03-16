@@ -1,5 +1,4 @@
-class Target
-{
+class Target {
   int posX;
   int posY;
   int objWidth;

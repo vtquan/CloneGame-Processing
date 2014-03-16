@@ -2,6 +2,8 @@ Game game;
 Player player;
 Target target;
 CloneMap cloneMap;
+int highScore;  //highest score
+int highSurvival; //highest survival time
 
 void setup()
 {
@@ -9,7 +11,7 @@ void setup()
   size(game.GAMEWIDTH,game.GAMEHEIGHT);
   player = new Player(10,10);
   target = new Target();
-  cloneMap = new CloneMap();
+  cloneMap = new CloneMap(player);
   frameRate(game.FRAMERATE);
 }
 
@@ -23,10 +25,11 @@ void draw()
   }
   else if(player.posY < 20 && game.crossed == false)
   {
+    stroke(0);
     line(0,20,width,20);  //start line for clone to appear
   }
   
-  if(game.crossed)
+  if(game.crossed && !game.end)
   {
     game.frameElapsed = frameCount - game.startingFrame;
     player.savedPosX.put(game.frameElapsed, player.posX);
@@ -35,28 +38,41 @@ void draw()
     //creating a clone every DELAY frame
     if((((game.frameElapsed) % 60) == 0) && frameCount >= (game.startingFrame+game.DELAY*game.FRAMERATE))
     {      
-      cloneMap.addClone(frameCount);
+      cloneMap.addClone();
     }
   }
     
-  cloneMap.updateMap(player.savedPosX, player.savedPosY);
-  cloneMap.drawMap();
-  
-  target.drawTarget();
-  player.updatePlayer();
-  player.drawPlayer();
-  
-  if(target.checkDetection(player))
+  if((frameCount > (game.startFrame + 60) && !game.end) || (game.end && frameCount > (game.endFrame + 60)))
   {
-    game.score++;
-    target = new Target(int(random(width)),int(random(height)),10,10);
+    if(game.end)
+      game.reset();
+    cloneMap.updateMap(player.savedPosX, player.savedPosY);
+    cloneMap.drawMap();
+    
+    target.drawTarget();
+    player.updatePlayer();
+    player.drawPlayer();
+    
+    if(target.checkDetection(player))
+    {
+      game.score++;
+      target = new Target(int(random(width)),int(random(height)),10,10);
+    }
+    
+    if(cloneMap.checkDetection(player))
+    {
+      game.end = true;
+      game.endFrame = frameCount;
+    }
+  }
+  else
+  {
+    player.drawPlayer();
+    target.drawTarget();
+    cloneMap.drawMap();
   }
   
-  if(cloneMap.checkDetection(player))
-  {
-    println("survival time: "+game.frameElapsed+" score: " +game.score);
-    game.reset();
-  }
+  game.showScore();
 }
 
 
