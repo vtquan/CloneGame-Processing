@@ -4,6 +4,8 @@ class Player{
   int posY = 10;
   int objWidth;
   int objHeight;
+  final color STROKE = color(51,127,116);
+  final color FILL = color(51,127,116);
   HashMap<Integer,Integer> savedPosX = new HashMap<Integer,Integer>();
   HashMap<Integer,Integer> savedPosY = new HashMap<Integer,Integer>();
   
@@ -47,8 +49,8 @@ class Player{
   void drawPlayer()
   {
     rectMode(CENTER);
-    stroke(0);
-    fill(255,0,0);
+    stroke(STROKE);
+    fill(FILL);
     rect(posX,posY,objWidth,objHeight);
   }
   

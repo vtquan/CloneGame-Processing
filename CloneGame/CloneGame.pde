@@ -2,6 +2,7 @@ Game game;
 Player player;
 Target target;
 CloneMap cloneMap;
+TileSheet tileSheet;
 int highScore;  //highest score
 int highSurvival; //highest survival time
 
@@ -12,12 +13,14 @@ void setup()
   player = new Player(10,10);
   target = new Target();
   cloneMap = new CloneMap(player);
+  tileSheet = new TileSheet();
   frameRate(game.FRAMERATE);
 }
 
 void draw()
 {
   background(255);
+  tileSheet.display();
   if(player.posY > 20 && game.crossed == false)
   {
     game.crossed = true;
@@ -53,13 +56,13 @@ void draw()
     player.updatePlayer();
     player.drawPlayer();
     
-    if(target.checkDetection(player))
+    if(target.detectCollision(player))
     {
       game.score++;
       target = new Target(int(random(width)),int(random(height)),10,10);
     }
     
-    if(cloneMap.checkDetection(player))
+    if(cloneMap.detectCollision(player))
     {
       game.end = true;
       game.endFrame = frameCount;
