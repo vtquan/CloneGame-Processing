@@ -1,8 +1,8 @@
 Game game;
+TileSheet tileSheet;
 Player player;
 Target target;
 CloneMap cloneMap;
-TileSheet tileSheet;
 int highScore;  //highest score
 int highSurvival; //highest survival time
 
@@ -10,10 +10,10 @@ void setup()
 {
   game = new Game();
   size(game.GAMEWIDTH,game.GAMEHEIGHT);
+  tileSheet = new TileSheet();
   player = new Player(10,10);
   target = new Target();
   cloneMap = new CloneMap(player);
-  tileSheet = new TileSheet();
   frameRate(game.FRAMERATE);
 }
 
@@ -54,6 +54,7 @@ void draw()
     
     target.drawTarget();
     player.updatePlayer();
+    tileSheet.detectCollision();
     player.drawPlayer();
     
     if(target.detectCollision(player))

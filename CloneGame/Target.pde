@@ -8,8 +8,19 @@ class Target {
   
   Target()
   {
+    SurfaceTile surfaceTile = new SurfaceTile();
     this.posX = int(random(width));
     this.posY = int(random(height));
+    int col = posX / surfaceTile.objWidth;
+    int row = posY / surfaceTile.objHeight;
+
+    while(tileSheet.tileSheetVisual[row][col] != 0)  //prevent unreachable target
+    {
+      this.posX = int(random(width));
+      this.posY = int(random(height));
+      col = posX / surfaceTile.objWidth;
+      row = posY / surfaceTile.objHeight;
+    }
     this.objWidth = 10;
     this.objHeight = 10;
   }

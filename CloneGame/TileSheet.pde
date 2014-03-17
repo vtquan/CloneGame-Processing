@@ -45,21 +45,77 @@ class TileSheet{
       for(int j = 0; j < tileSheet[0].length; j++)  //for each columns
       {
         tileSheet[i][j].display();
-        println("x: "+tileSheet[i][j].posX+" y: "+tileSheet[i][j].posY);
       }
     }
   }
   
-  void detectCollision()
+  boolean detectCollision()
   {
+    PGraphics pg = createGraphics(game.GAMEWIDTH,game.GAMEHEIGHT);
+    boolean result = false;
+    SurfaceTile surfaceTile = new SurfaceTile();
+    
+    pg.beginDraw();
+    pg.background(255);
+    color c = color(0);
+    
     for(int i = 0; i < tileSheet.length; i++)  //for each row
     {
       for(int j = 0; j < tileSheet[0].length; j++)  //for each columns
       {
-        tileSheet[i][j].display();
-        println("x: "+tileSheet[i][j].posX+" y: "+tileSheet[i][j].posY);
+        tileSheet[i][j].display(pg);
       }
     }
+        
+    //checking the 4 corner of the player to see if the pixel is not the same as background
+    if(pg.get(player.posX - int(player.objWidth/2), player.posY - int(player.objHeight/2)) != surfaceTile.FILL)  //check top left corner of player
+    {
+      //find current tile position
+      int posX = player.posX - int(player.objWidth/2); 
+      int posY = player.posY - int(player.objHeight/2);
+      int col = posX / surfaceTile.objWidth;
+      int row = posY / surfaceTile.objHeight;
+      
+      println("row: "+row+" col: "+row);
+      tileSheet[row][col].collisionAction();
+    }
+    else if(pg.get(player.posX - int(player.objWidth/2), player.posY + int(player.objHeight/2)) != surfaceTile.FILL)  //check top right corner of player
+    {
+      //find current tile position
+      int posX = player.posX - int(player.objWidth/2); 
+      int posY = player.posY + int(player.objHeight/2);
+      int col = posX / surfaceTile.objWidth;
+      int row = posY / surfaceTile.objHeight;
+      
+      println("row: "+row+" col: "+row);
+      tileSheet[row][col].collisionAction();
+    }
+    else if(pg.get(player.posX + int(player.objWidth/2), player.posY - int(player.objHeight/2)) != surfaceTile.FILL)  //check bottom left corner of player
+    {
+      //find current tile position
+      int posX = player.posX + int(player.objWidth/2); 
+      int posY = player.posY - int(player.objHeight/2);
+      int col = posX / surfaceTile.objWidth;
+      int row = posY / surfaceTile.objHeight;
+      
+      println("row: "+row+" col: "+row);
+      tileSheet[row][col].collisionAction();
+    }
+    else if(pg.get(player.posX + int(player.objWidth/2), player.posY + int(player.objHeight/2)) != surfaceTile.FILL)  //check bottom right corner of player
+    {
+      //find current tile position
+      int posX = player.posX + int(player.objWidth/2); 
+      int posY = player.posY + int(player.objHeight/2);
+      int col = posX / surfaceTile.objWidth;
+      int row = posY / surfaceTile.objHeight;
+      
+      println("row: "+row+" col: "+row);
+      tileSheet[row][col].collisionAction();
+    }
+    
+    pg.endDraw();
+    
+    return result;
   }
 }
 

@@ -8,4 +8,10 @@ class LavaTile extends Tile {
   {
     super(color(255), color(255,0,0), posX, posY, objWidth, objHeight);
   }
+  
+  void collisionAction()
+  {
+    game.end = true;
+    game.endFrame = frameCount;
+  }
 }

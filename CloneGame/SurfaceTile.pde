@@ -8,4 +8,8 @@ class SurfaceTile extends Tile {
   {
     super(color(255), color(255), posX, posY, objWidth, objHeight);
   }
+  
+  void collisionAction()
+  {
+  }
 }
