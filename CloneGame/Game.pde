@@ -10,8 +10,8 @@ class Game {
   final int FRAMERATE = 60;   //framerate of game
   final int COUNTDOWN = 1;  //number of second before input is accepted when game start
   final int DELAY = 1;  //number of second between clone creation
-  final int GAMEWIDTH = 1200;  //width of game screen
-  final int GAMEHEIGHT = 1000;  //height of game screen
+  final int GAMEWIDTH = 600;  //width of game screen
+  final int GAMEHEIGHT = 500;  //height of game screen
   
   Game()
   {
