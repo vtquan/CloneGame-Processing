@@ -21,11 +21,44 @@ class Player{
   
   void updatePlayer()
   {
+    int mouseDeltaX = 0;
+    int mouseDeltaY = 0;
+    PVector mouseVector = new PVector(0,0);
     if(mousePressed)
     {
-      posX += getSpeedX(posX, posY);
-      posY += getSpeedY(posX, posY);
+      mouseDeltaX += getMouseDeltaX();
+      mouseDeltaY += getMouseDeltaY();
+      mouseVector = new PVector(mouseDeltaX, mouseDeltaY);
     }
+    
+    int keyDeltaX = 0;
+    int keyDeltaY = 0;
+    PVector keyVector = new PVector(0,0);
+    if(keyPressed)
+    {
+      
+      keyDeltaX += getKeyDeltaX();
+      keyDeltaY += getKeyDeltaY();
+      keyVector = new PVector(keyDeltaX, keyDeltaY);
+    }
+    
+    PVector deltaVector = PVector.add(mouseVector, keyVector);
+    
+    int speedX = 0;
+    int speedY = 0;
+    if (deltaVector.mag() >= SPEED)   
+    {
+        speedX = int((deltaVector.x / deltaVector.mag()) * SPEED);
+        speedY = int((deltaVector.y / deltaVector.mag()) * SPEED);
+    }
+    else if (deltaVector.mag() < SPEED) //for stabilization when player is near touch point
+    {
+        speedX = int(deltaVector.x);
+        speedY = int(deltaVector.y);
+    }
+    
+    posX += speedX;
+    posY += speedY;
 
     // Check borders
     if (posX < objWidth/2)
@@ -54,11 +87,12 @@ class Player{
     rect(posX,posY,objWidth,objHeight);
   }
   
-  int getSpeedX(int posX, int posY)
+  int getMouseDeltaX()
   {
     float xDelta = mouseX - posX;
     float yDelta = mouseY - posY;
     float delta = sqrt(sq(xDelta) + sq(yDelta));
+    
     int speedX = 0;
     if (delta >= SPEED)   
         speedX = int((xDelta / delta) * SPEED);
@@ -67,7 +101,7 @@ class Player{
     return speedX;
   }
   
-  int getSpeedY(int posX, int posY)
+  int getMouseDeltaY()
   {
     float xDelta = mouseX - posX;
     float yDelta = mouseY - posY;
@@ -77,6 +111,46 @@ class Player{
         speedY = int((yDelta / delta) * SPEED);
     else if (delta < SPEED) //for stabilization when player is near touch point
         speedY = int(yDelta);
+    return speedY;
+  }
+  
+  int getKeyDeltaX()
+  {
+    int speedX = 0;
+    if(key == CODED)
+    {
+      if(keyCode == RIGHT)
+        speedX = SPEED;
+      else (keyCode == LEFT)
+        speedX = -SPEED;
+    }
+    else
+    {
+      if(key == 'd' || key == 'D')
+        speedX = SPEED;
+      else if(key == 'a' || key == 'A')
+        speedX = -SPEED;
+    }
+    return speedX;
+  }
+  
+  int getKeyDeltaY()
+  {
+    int speedY = 0;
+    if(key == CODED)
+    {
+      if(keyCode == DOWN)
+        speedY = SPEED;
+      else if(keyCode == UP)
+        speedY = -SPEED;
+    }
+    else
+    {
+      if(key == 's' || key == 'S')
+        speedY = SPEED;
+      else if(key == 'w' || key == 'W')
+        speedY = -SPEED;
+    }
     return speedY;
   }
 }
