@@ -35,7 +35,7 @@ void draw()
     player.savedPosY.put(game.frameElapsed, player.posY);
     
     //creating a clone every DELAY frame
-    if((((game.frameElapsed) % 60) == 0) && frameCount >= (game.startingFrame+game.DELAY*game.FRAMERATE))
+    if((((game.frameElapsed) % 60) == 0) && frameCount >= (game.startingFrame+game.DELAY*game.FRAMERATE) && cloneMap.numClone < 1)
     {      
       cloneMap.addClone();
     }
@@ -59,11 +59,11 @@ void draw()
       target = new Target(int(random(width)),int(random(height)),10,10);
     }
     
-    if(cloneMap.detectCollision(player))
-    {
-      game.end = true;
-      game.endFrame = frameCount;
-    }
+//    if(cloneMap.detectCollision(player))
+//    {
+//      game.end = true;
+//      game.endFrame = frameCount;
+//    }
   }
   else
   {

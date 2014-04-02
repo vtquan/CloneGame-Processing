@@ -35,28 +35,29 @@ class Clone{
   {
     posX = source.savedPosX.get(frameCount - frameOfCreation);
     posY = source.savedPosY.get(frameCount - frameOfCreation);
-    if(frameCount % int(frameRate/4) == 0)
-      currentFrame = ++currentFrame % img.length;
+    if(source.savedPosX.get(frameCount+1 - frameOfCreation) - posX != 0 || source.savedPosY.get(frameCount+1 - frameOfCreation) - posY != 0)  //don't animate when staying still
+    {
+      if(frameCount % int(frameRate/4) == 0)  
+        currentFrame = ++currentFrame % img.length;
+    }
   }
   
   void drawClone()
-  {
-    stroke(STROKE);
-    fill(FILL);
-    rect(posX,posY,objWidth,objHeight);
-    
+  {    
     beginShape();
     pushMatrix();
     translate(posX,posY);
     if(!game.end)
     {
-      if(frameCount - frameOfCreation == 0)
-        currentAngle = atan2(source.savedPosX.get(frameCount+1 - frameOfCreation) - posX, posY - source.savedPosY.get(frameCount+1 - frameOfCreation))
-      else
-        currentAngle = atan2(posX - source.savedPosX.get(frameCount-1 - frameOfCreation), source.savedPosY.get(frameCount-1 - frameOfCreation) - posY));
-       
-       rotate(currentAngle);
+      if(source.savedPosX.get(frameCount+1 - frameOfCreation) - posX != 0 || source.savedPosY.get(frameCount+1 - frameOfCreation) - posY != 0)  //don't rotate when staying still
+      {
+        if(frameCount - frameOfCreation == 0)
+          currentAngle = atan2(source.savedPosX.get(frameCount+1 - frameOfCreation) - posX, posY - source.savedPosY.get(frameCount+1 - frameOfCreation));
+        else
+          currentAngle = atan2(posX - source.savedPosX.get(frameCount-1 - frameOfCreation), source.savedPosY.get(frameCount-1 - frameOfCreation) - posY);
+      }
     }
+    rotate(currentAngle);
     image(img[currentFrame],0,0);
     popMatrix();
     endShape();    

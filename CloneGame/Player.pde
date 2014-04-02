@@ -8,6 +8,11 @@ class Player{
   final color FILL = color(51,127,116);
   HashMap<Integer,Integer> savedPosX = new HashMap<Integer,Integer>();
   HashMap<Integer,Integer> savedPosY = new HashMap<Integer,Integer>();
+  PImage[] img = new PImage[4];
+  int currentFrame;
+  float currentAngle;
+  int prevX = -1;
+  int prevY = -1;
   
   Player() {
     this.objWidth = 10;
@@ -17,10 +22,17 @@ class Player{
   Player(int objWidth, int objHeight) {
     this.objWidth = objWidth;
     this.objHeight = objHeight;
+    img[0] = loadImage("Ship/ship1.png");
+    img[1] = loadImage("Ship/ship2.png");
+    img[2] = loadImage("Ship/ship3.png");
+    img[3] = loadImage("Ship/ship4.png");
+    currentFrame = int(random(0,4));
   }
   
   void updatePlayer()
   {
+    prevX = posX;
+    prevY = posY;
     int mouseDeltaX = 0;
     int mouseDeltaY = 0;
     PVector mouseVector = new PVector(0,0);
@@ -77,7 +89,7 @@ class Player{
         posY = height-1 - objHeight/2;
     }
     
-    tileSheet.detectCollision();
+    currentFrame = int(random(0,img.length));
   }
   
   void drawPlayer()
@@ -85,6 +97,24 @@ class Player{
     stroke(STROKE);
     fill(FILL);
     rect(posX,posY,objWidth,objHeight);
+    
+    beginShape();
+    pushMatrix();
+    translate(posX,posY);
+    if(!game.end)
+    {
+      if(posX - prevX != 0 || prevY - posY != 0)  //don't rotate when staying still
+      {
+        if(prevX == -1 && prevY == -1)  //face down at the beginning of the game
+          currentAngle = PI;
+        else
+          currentAngle = atan2(posX - prevX, prevY - posY);
+      }
+    }
+    rotate(currentAngle);
+    image(img[currentFrame],0,0);
+    popMatrix();
+    endShape();    
   }
   
   int getMouseDeltaX()
