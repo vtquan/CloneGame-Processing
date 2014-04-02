@@ -34,6 +34,7 @@ class CloneMap{
   
   void drawMap(PGraphics pg)
   {
+    pg.background(255);
     for (int i = 0; i < numClone; i++)
     {
       cloneMap.get(i).drawClone(pg);
@@ -53,7 +54,6 @@ class CloneMap{
   
   boolean detectCollision(Player player)
   {
-    PGraphics pg = createGraphics(game.GAMEWIDTH,game.GAMEHEIGHT);
     boolean result = false;
     
     pg.beginDraw();

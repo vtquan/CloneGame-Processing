@@ -6,7 +6,7 @@ class BlockTile extends Tile {
   
   BlockTile(int posX, int posY, int objWidth, int objHeight)
   {
-    super(color(255), color(128,128,128), posX, posY, objWidth, objHeight);
+    super(color(128,128,128), color(128,128,128), posX, posY, objWidth, objHeight);
   }
   
   void collisionAction()
@@ -22,8 +22,11 @@ class BlockTile extends Tile {
     {
       player.posX = this.posX + this.objWidth/2 + player.objWidth/2;
     }
-    
-    if(posY < this.posY && posX > this.posX - this.objWidth/2 && posX < this.posX + this.objWidth/2 )
+ 
+    posX = player.posX;
+    posY = player.posY;
+
+    if(posY < this.posY && posX > this.posX - this.objWidth/2 && posX < this.posX + this.objWidth/2)
     {
       player.posY = this.posY - this.objHeight/2 - player.objHeight/2;
     }

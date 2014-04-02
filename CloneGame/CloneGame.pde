@@ -7,6 +7,10 @@ void setup()
   target = new Target();
   cloneMap = new CloneMap(player);
   frameRate(game.FRAMERATE);
+  rectMode(CENTER);
+  pg = createGraphics(game.GAMEWIDTH,game.GAMEHEIGHT);
+  pg.rectMode(CENTER);
+  imageMode(CENTER);
 }
 
 void draw()

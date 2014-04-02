@@ -36,7 +36,6 @@ class Player{
     PVector keyVector = new PVector(0,0);
     if(keyPressed)
     {
-      
       keyDeltaX += getKeyDeltaX();
       keyDeltaY += getKeyDeltaY();
       keyVector = new PVector(keyDeltaX, keyDeltaY);
@@ -77,11 +76,12 @@ class Player{
     {
         posY = height-1 - objHeight/2;
     }
+    
+    tileSheet.detectCollision();
   }
   
   void drawPlayer()
   {
-    rectMode(CENTER);
     stroke(STROKE);
     fill(FILL);
     rect(posX,posY,objWidth,objHeight);

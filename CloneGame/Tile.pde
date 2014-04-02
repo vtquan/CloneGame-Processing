@@ -5,6 +5,7 @@ class Tile {
   int objHeight;
   final color STROKE;
   final color FILL;
+  PImage[] img;
   
   Tile()
   {
@@ -38,7 +39,6 @@ class Tile {
   
   void display()
   {
-    rectMode(CENTER);
     stroke(STROKE);
     fill(FILL);
     rect(posX,posY,objWidth,objHeight);
@@ -46,9 +46,8 @@ class Tile {
   
   void display(PGraphics pg)
   {
-    pg.rectMode(CENTER);
     pg.stroke(FILL);
-    pg.fill(FILL);
+    pg.fill(STROKE);
     pg.rect(posX,posY,objWidth,objHeight);
   }
   

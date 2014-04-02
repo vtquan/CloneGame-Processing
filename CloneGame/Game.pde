@@ -19,7 +19,6 @@ class Game {
     endFrame = 0;
     crossed = false;
     score = 0;
-    
   }
   
   void showScore()

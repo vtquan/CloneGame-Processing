@@ -25,13 +25,13 @@ class TileSheet{
       {
         switch(tileSheetVisual[i][j]) {
         case 0: 
-          tileSheet[i][j] = new SurfaceTile(posX+ (objWidth*j), posY + (objHeight*i), objWidth, objHeight);
+          tileSheet[i][j] = new SurfaceTile(posX + (objWidth*j), posY + (objHeight*i), objWidth, objHeight);
           break;
         case 1: 
-          tileSheet[i][j] = new BlockTile(posX+ (objWidth*j), posY + (objHeight*i), objWidth, objHeight);
+          tileSheet[i][j] = new BlockTile(posX + (objWidth*j), posY + (objHeight*i), objWidth, objHeight);
           break;
         default:
-          tileSheet[i][j] = new LavaTile(posX+ (objWidth*j), posY + (objHeight*i), objWidth, objHeight);
+          tileSheet[i][j] = new LavaTile(posX + (objWidth*j), posY + (objHeight*i), objWidth, objHeight);
           break;
         } 
       }
@@ -51,13 +51,11 @@ class TileSheet{
   
   boolean detectCollision()
   {
-    PGraphics pg = createGraphics(game.GAMEWIDTH,game.GAMEHEIGHT);
     boolean result = false;
     Tile surfaceTile = tileSheet[0][0];
     
     pg.beginDraw();
     pg.background(255);
-    color c = color(0);
     
     //find current tile position
     int cPosX = player.posX;

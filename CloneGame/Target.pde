@@ -35,7 +35,6 @@ class Target {
   
   void drawTarget()
   {
-    rectMode(CENTER);
     stroke(STROKE);
     fill(FILL);
     rect(posX,posY,objWidth,objHeight);
@@ -51,7 +50,6 @@ class Target {
   
   boolean detectCollision(Player player)
   {
-    PGraphics pg = createGraphics(game.GAMEWIDTH,game.GAMEHEIGHT);
     boolean result = false;
     
     pg.beginDraw();
