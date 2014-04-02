@@ -59,11 +59,11 @@ void draw()
       target = new Target(int(random(width)),int(random(height)),10,10);
     }
     
-//    if(cloneMap.detectCollision(player))
-//    {
-//      game.end = true;
-//      game.endFrame = frameCount;
-//    }
+    if(cloneMap.detectCollision(player))
+    {
+      game.end = true;
+      game.endFrame = frameCount;
+    }
   }
   else
   {
