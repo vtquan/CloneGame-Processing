@@ -121,7 +121,7 @@ class Player{
     {
       if(keyCode == RIGHT)
         speedX = SPEED;
-      else (keyCode == LEFT)
+      else if(keyCode == LEFT)
         speedX = -SPEED;
     }
     else
