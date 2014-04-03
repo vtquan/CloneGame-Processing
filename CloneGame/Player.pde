@@ -150,16 +150,16 @@ class Player{
     if(key == CODED)
     {
       if(keyCode == RIGHT)
-        speedX = SPEED;
-      else if(keyCode == LEFT)
-        speedX = -SPEED;
+        speedX += SPEED;
+      if(keyCode == LEFT)
+        speedX += -SPEED;
     }
     else
     {
       if(key == 'd' || key == 'D')
-        speedX = SPEED;
-      else if(key == 'a' || key == 'A')
-        speedX = -SPEED;
+        speedX += SPEED;
+      if(key == 'a' || key == 'A')
+        speedX += -SPEED;
     }
     return speedX;
   }
@@ -170,16 +170,16 @@ class Player{
     if(key == CODED)
     {
       if(keyCode == DOWN)
-        speedY = SPEED;
-      else if(keyCode == UP)
-        speedY = -SPEED;
+        speedY += SPEED;
+      if(keyCode == UP)
+        speedY += -SPEED;
     }
     else
     {
       if(key == 's' || key == 'S')
-        speedY = SPEED;
-      else if(key == 'w' || key == 'W')
-        speedY = -SPEED;
+        speedY += SPEED;
+      if(key == 'w' || key == 'W')
+        speedY += -SPEED;
     }
     return speedY;
   }
