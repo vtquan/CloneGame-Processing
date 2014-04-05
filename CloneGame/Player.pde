@@ -10,7 +10,7 @@ class Player{
   HashMap<Integer,Integer> savedPosY = new HashMap<Integer,Integer>();
   PImage[] img = new PImage[4];
   int currentFrame;
-  float currentAngle;
+  float currentAngle = PI;
   int prevX = -1;
   int prevY = -1;
   
@@ -33,43 +33,18 @@ class Player{
   {
     prevX = posX;
     prevY = posY;
-    int mouseDeltaX = 0;
-    int mouseDeltaY = 0;
-    PVector mouseVector = new PVector(0,0);
-    if(mousePressed)
+    float deltaX = getDeltaX();
+    float deltaY = getDeltaY();
+    float delta = sqrt(sq(deltaX) + sq(deltaY));    
+    
+    if (delta >= SPEED)   
     {
-      mouseDeltaX += getMouseDeltaX();
-      mouseDeltaY += getMouseDeltaY();
-      mouseVector = new PVector(mouseDeltaX, mouseDeltaY);
+        deltaX = (deltaX / delta) * SPEED;
+        deltaY = (deltaY / delta) * SPEED;
     }
     
-    int keyDeltaX = 0;
-    int keyDeltaY = 0;
-    PVector keyVector = new PVector(0,0);
-    if(keyPressed)
-    {
-      keyDeltaX += getKeyDeltaX();
-      keyDeltaY += getKeyDeltaY();
-      keyVector = new PVector(keyDeltaX, keyDeltaY);
-    }
-    
-    PVector deltaVector = PVector.add(mouseVector, keyVector);
-    
-    int speedX = 0;
-    int speedY = 0;
-    if (deltaVector.mag() >= SPEED)   
-    {
-        speedX = int((deltaVector.x / deltaVector.mag()) * SPEED);
-        speedY = int((deltaVector.y / deltaVector.mag()) * SPEED);
-    }
-    else if (deltaVector.mag() < SPEED) //for stabilization when player is near touch point
-    {
-        speedX = int(deltaVector.x);
-        speedY = int(deltaVector.y);
-    }
-    
-    posX += speedX;
-    posY += speedY;
+    posX += deltaX;
+    posY += deltaY;
 
     // Check borders
     if (posX < objWidth/2)
@@ -89,6 +64,15 @@ class Player{
         posY = height-1 - objHeight/2;
     }
     
+    //change rotation
+    if(!game.end)
+    {
+      if(posX - prevX != 0 || prevY - posY != 0)  //don't rotate when staying still
+      {
+        currentAngle = atan2(posX - prevX, prevY - posY);
+      }
+    }
+    
     currentFrame = int(random(0,img.length));
   }
   
@@ -97,86 +81,45 @@ class Player{
     beginShape();
     pushMatrix();
     translate(posX,posY);
-    if(!game.end)
-    {
-      if(posX - prevX != 0 || prevY - posY != 0)  //don't rotate when staying still
-      {
-        if(prevX == -1 && prevY == -1)  //face down at the beginning of the game
-          currentAngle = PI;
-        else
-          currentAngle = atan2(posX - prevX, prevY - posY);
-      }
-    }
     rotate(currentAngle);
     image(img[currentFrame],0,0);
     popMatrix();
     endShape();    
   }
   
-  int getMouseDeltaX()
+  float getDeltaX()
   {
-    float xDelta = mouseX - posX;
-    float yDelta = mouseY - posY;
-    float delta = sqrt(sq(xDelta) + sq(yDelta));
-    
-    int speedX = 0;
-    if (delta >= SPEED)   
-        speedX = int((xDelta / delta) * SPEED);
-    else if (delta < SPEED) //for stabilization when player is near touch point
-        speedX = int(xDelta);
-    return speedX;
-  }
-  
-  int getMouseDeltaY()
-  {
-    float xDelta = mouseX - posX;
-    float yDelta = mouseY - posY;
-    float delta = sqrt(sq(xDelta) + sq(yDelta));
-    int speedY = 0;
-    if (delta >= SPEED)   
-        speedY = int((yDelta / delta) * SPEED);
-    else if (delta < SPEED) //for stabilization when player is near touch point
-        speedY = int(yDelta);
-    return speedY;
-  }
-  
-  int getKeyDeltaX()
-  {
-    int speedX = 0;
-    if(key == CODED)
+    float deltaX = 0;
+    if(mousePressed)
     {
-      if(keyCode == RIGHT)
-        speedX += SPEED;
-      if(keyCode == LEFT)
-        speedX += -SPEED;
+      deltaX = mouseX - posX;
     }
-    else
+    if(keyPressed)
     {
       if(key == 'd' || key == 'D')
-        speedX += SPEED;
+        deltaX += SPEED;
       if(key == 'a' || key == 'A')
-        speedX += -SPEED;
+        deltaX += -SPEED;
     }
-    return speedX;
+    
+    return deltaX;
   }
   
-  int getKeyDeltaY()
+  float getDeltaY()
   {
-    int speedY = 0;
-    if(key == CODED)
+    float deltaY = 0;
+    if(mousePressed)
     {
-      if(keyCode == DOWN)
-        speedY += SPEED;
-      if(keyCode == UP)
-        speedY += -SPEED;
+      deltaY = mouseY - posY;
     }
-    else
+    if(keyPressed)
     {
       if(key == 's' || key == 'S')
-        speedY += SPEED;
+        deltaY += SPEED;
       if(key == 'w' || key == 'W')
-        speedY += -SPEED;
+        deltaY += -SPEED;
     }
-    return speedY;
+    
+    return deltaY;
   }
 }

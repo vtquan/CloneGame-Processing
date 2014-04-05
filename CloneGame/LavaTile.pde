@@ -1,10 +1,14 @@
 class LavaTile extends Tile {
   PImage[] img = new PImage[45];
+  PImage[] coolImg = new PImage[4];
   int currentFrame = int(random(0,45));
+  int coolImageIndex = int(random(0,4));
   int currentTint = int(random(0,256));
+  int currentAlpha = int(random(0,256));
   int coolFrame;
   boolean cool = false;
   boolean coolingState = true;
+  float cooledTime = 2.5;  //how long lava remain cooled in second
   
   LavaTile()
   {
@@ -20,23 +24,25 @@ class LavaTile extends Tile {
       img[i] = loadImage("Lava/fire_00"+trim(nfs(i, 2))+".jpg");
     }
     currentFrame = int(random(0,45));
+    
+    coolImg[0] = loadImage("LavaCooled/cooled1.jpg");
+    coolImg[1] = loadImage("LavaCooled/cooled2.jpg");
+    coolImg[2] = loadImage("LavaCooled/cooled3.jpg");
+    coolImg[3] = loadImage("LavaCooled/cooled4.jpg");
   }
   
   void display()  //override Tile display 
   {
-    
-    tint(currentTint);
-    image(img[currentFrame],posX,posY,objWidth,objHeight);
-    currentFrame = ++currentFrame % img.length;
+    image(coolImg[coolImageIndex],posX,posY,objWidth,objHeight);
     if(!cool)
     {
-      tint(currentTint);
+      tint(255,currentAlpha);
       image(img[currentFrame],posX,posY,objWidth,objHeight);
       currentFrame = ++currentFrame % img.length;
       if(coolingState)
       {
-        currentTint--;
-        if(currentTint == 30)
+        currentAlpha--;
+        if(currentAlpha <= 0)
         {
           cool = true;
           coolFrame = frameCount;
@@ -44,24 +50,23 @@ class LavaTile extends Tile {
       }
       else
       {
-        currentTint++;
-        if(currentTint == 254)
+        currentAlpha++;
+        if(currentAlpha >= 254)
         {
           coolingState = true;
+          coolImageIndex = int(random(0,coolImg.length));
         }
       }
     }
     else
     {
-      stroke(0,0,255);
-      fill(0,0,255);
-      rect(posX,posY,objWidth,objHeight);
-      if(frameCount > (coolFrame+100))
+      if(frameCount > (coolFrame+(cooledTime * game.FRAMERATE)))  //lava remain cool for 2.5 seconds
       {
         cool = false;
         coolingState = false;
       }
     }
+    tint(255,255);
   }
   
   void collisionAction()

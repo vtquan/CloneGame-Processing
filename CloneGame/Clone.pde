@@ -39,14 +39,9 @@ class Clone{
     {
       if(frameCount % int(frameRate/4) == 0)  
         currentFrame = ++currentFrame % img.length;
-    }
-  }
-  
-  void drawClone()
-  {    
-    beginShape();
-    pushMatrix();
-    translate(posX,posY);
+    }    
+    
+    //change rotation
     if(!game.end)
     {
       if(source.savedPosX.get(frameCount+1 - frameOfCreation) - posX != 0 || source.savedPosY.get(frameCount+1 - frameOfCreation) - posY != 0)  //don't rotate when staying still
@@ -57,6 +52,13 @@ class Clone{
           currentAngle = atan2(posX - source.savedPosX.get(frameCount-1 - frameOfCreation), source.savedPosY.get(frameCount-1 - frameOfCreation) - posY);
       }
     }
+  }
+  
+  void drawClone()
+  {    
+    beginShape();
+    pushMatrix();
+    translate(posX,posY);
     rotate(currentAngle);
     image(img[currentFrame],0,0);
     popMatrix();

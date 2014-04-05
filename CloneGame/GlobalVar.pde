@@ -8,6 +8,8 @@ import ddf.minim.effects.*;
 Minim minim;
 AudioPlayer groove;
 AudioSample burn;
+AudioSample explosion;
+AudioSample thruster;
 
 Game game;
 TileSheet tileSheet;

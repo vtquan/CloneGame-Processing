@@ -54,9 +54,4 @@ class Tile {
   void collisionAction()  //action to take when collided
   {
   }
-  
-//  boolean detectCollision(Player player)
-//  {
-//    
-//  }
 }

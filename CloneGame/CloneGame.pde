@@ -13,9 +13,10 @@ void setup()
   imageMode(CENTER);
     
   minim = new Minim(this);
-  //groove = minim.loadFile("Circumspection.mp3");
+  groove = minim.loadFile("Circumspection.mp3");
   burn = minim.loadSample("SoundEffects/Burn.wav");
-  //groove.play();
+  burn = minim.loadSample("SoundEffects/Explosion.wav");
+  groove.play();
 }
 
 void draw()
