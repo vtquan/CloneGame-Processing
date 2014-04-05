@@ -1,7 +1,7 @@
 void setup()
 {
   game = new Game();
-  size(game.GAMEWIDTH,game.GAMEHEIGHT);
+  size(game.GAMEWIDTH,game.GAMEHEIGHT,P3D);
   tileSheet = new TileSheet();
   player = new Player(10,10);
   target = new Target();
@@ -11,6 +11,11 @@ void setup()
   pg = createGraphics(game.GAMEWIDTH,game.GAMEHEIGHT);
   pg.rectMode(CENTER);
   imageMode(CENTER);
+    
+  minim = new Minim(this);
+  //groove = minim.loadFile("Circumspection.mp3");
+  burn = minim.loadSample("SoundEffects/Burn.wav");
+  //groove.play();
 }
 
 void draw()
@@ -35,7 +40,7 @@ void draw()
     player.savedPosY.put(game.frameElapsed, player.posY);
     
     //creating a clone every DELAY frame
-    if((((game.frameElapsed) % 60) == 0) && frameCount >= (game.startingFrame+game.DELAY*game.FRAMERATE) && cloneMap.numClone < 1)
+    if((((game.frameElapsed) % 60) == 0) && frameCount >= (game.startingFrame+game.DELAY*game.FRAMERATE))
     {      
       cloneMap.addClone();
     }
@@ -65,7 +70,7 @@ void draw()
       game.endFrame = frameCount;
     }
   }
-  else
+  else  //draw everything when game end but do not update them
   {
     player.drawPlayer();
     target.drawTarget();

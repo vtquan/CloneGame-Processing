@@ -94,10 +94,6 @@ class Player{
   
   void drawPlayer()
   {
-    stroke(STROKE);
-    fill(FILL);
-    rect(posX,posY,objWidth,objHeight);
-    
     beginShape();
     pushMatrix();
     translate(posX,posY);

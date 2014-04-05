@@ -46,8 +46,8 @@ class Tile {
   
   void display(PGraphics pg)
   {
-    pg.stroke(FILL);
-    pg.fill(STROKE);
+    pg.stroke(STROKE);
+    pg.fill(FILL);
     pg.rect(posX,posY,objWidth,objHeight);
   }
   
