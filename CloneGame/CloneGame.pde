@@ -35,19 +35,6 @@ void draw()
     stroke(0);
     line(0,20,width,20);  //start line for clone to appear
   }
-  
-  if(game.crossed && !game.end)
-  {
-    game.frameElapsed = frameCount - game.startingFrame;
-    player.savedPosX.put(game.frameElapsed, player.posX);
-    player.savedPosY.put(game.frameElapsed, player.posY);
-    
-    //creating a clone every DELAY frame
-    if((((game.frameElapsed) % 60) == 0) && frameCount >= (game.startingFrame+game.DELAY*game.FRAMERATE))
-    {      
-      cloneMap.addClone();
-    }
-  }
     
   if((frameCount > (game.startFrame + 60) && !game.end) || (game.end && frameCount > (game.endFrame + 60)))
   {
@@ -80,6 +67,19 @@ void draw()
     player.drawPlayer();
     target.drawTarget();
     cloneMap.drawMap();
+  }
+  
+  if(game.crossed && !game.end)
+  {
+    game.frameElapsed = frameCount - game.startingFrame;
+    player.savedPosX.put(game.frameElapsed, player.posX);
+    player.savedPosY.put(game.frameElapsed, player.posY);
+    
+    //creating a clone every DELAY frame
+    if((((game.frameElapsed) % 60) == 0) && frameCount >= (game.startingFrame+game.DELAY*game.FRAMERATE))
+    {      
+      cloneMap.addClone();
+    }
   }
   
   game.showScore();

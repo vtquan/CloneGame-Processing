@@ -7,7 +7,7 @@ class Game {
   int startingFrame;  //frame number when line is crossed
   int frameElapsed; //number of frame since startingFrame
   
-  final int FRAMERATE = 30;   //framerate of game
+  final int FRAMERATE = 60;   //framerate of game
   final int COUNTDOWN = 1;  //number of second before input is accepted when game start
   final int DELAY = 1;  //number of second between clone creation
   final int GAMEWIDTH = 600;  //width of game screen

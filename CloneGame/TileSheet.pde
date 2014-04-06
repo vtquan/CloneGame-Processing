@@ -82,7 +82,7 @@ class TileSheet{
       }
     }
         
-    //checking the 4 corner of the player to see if the pixel is not the same as background
+    //checking the 4 corner of the player to see if the pixel is not the same as SurfaceTile
     if(pg.get(player.posX - int(player.objWidth/2), player.posY - int(player.objHeight/2)) != surfaceTile.FILL)  //check top left corner of player
     {
       //find current tile position
