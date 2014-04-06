@@ -54,4 +54,8 @@ class Tile {
   void collisionAction()  //action to take when collided
   {
   }
+  
+  void cloneCollisionAction(Clone clone)  //action to take when collided
+  {
+  }
 }

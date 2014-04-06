@@ -10,6 +10,7 @@ class Clone{
   PImage[] img = new PImage[4];
   int currentFrame;
   float currentAngle;
+  boolean dead = false;
   
   Clone()
   {
@@ -33,42 +34,53 @@ class Clone{
   
   void updateClone()
   {
-    xPos = source.savedxPos.get(frameCount - frameOfCreation);
-    yPos = source.savedyPos.get(frameCount - frameOfCreation);
-    if(source.savedxPos.get(frameCount+1 - frameOfCreation) - xPos != 0 || source.savedyPos.get(frameCount+1 - frameOfCreation) - yPos != 0)  //don't animate when staying still
+    if(!dead)
     {
-      if(frameCount % int(frameRate/4) == 0)  
-        currentFrame = ++currentFrame % img.length;
-    }    
-    
-    //change rotation
-    if(!game.end)
-    {
-      if(source.savedxPos.get(frameCount+1 - frameOfCreation) - xPos != 0 || source.savedyPos.get(frameCount+1 - frameOfCreation) - yPos != 0)  //don't rotate when staying still
+      xPos = source.savedxPos.get(frameCount - frameOfCreation);
+      yPos = source.savedyPos.get(frameCount - frameOfCreation);
+      if(source.savedxPos.get(frameCount+1 - frameOfCreation) - xPos != 0 || source.savedyPos.get(frameCount+1 - frameOfCreation) - yPos != 0)  //don't animate when staying still
       {
-        if(frameCount - frameOfCreation == 0)
-          currentAngle = atan2(source.savedxPos.get(frameCount+1 - frameOfCreation) - xPos, yPos - source.savedyPos.get(frameCount+1 - frameOfCreation));
-        else
-          currentAngle = atan2(xPos - source.savedxPos.get(frameCount-1 - frameOfCreation), source.savedyPos.get(frameCount-1 - frameOfCreation) - yPos);
+        if(frameCount % int(frameRate/4) == 0)  
+          currentFrame = ++currentFrame % img.length;
+      }    
+      
+      //change rotation
+      if(!game.end)
+      {
+        if(source.savedxPos.get(frameCount+1 - frameOfCreation) - xPos != 0 || source.savedyPos.get(frameCount+1 - frameOfCreation) - yPos != 0)  //don't rotate when staying still
+        {
+          if(frameCount - frameOfCreation == 0)
+            currentAngle = atan2(source.savedxPos.get(frameCount+1 - frameOfCreation) - xPos, yPos - source.savedyPos.get(frameCount+1 - frameOfCreation));
+          else
+            currentAngle = atan2(xPos - source.savedxPos.get(frameCount-1 - frameOfCreation), source.savedyPos.get(frameCount-1 - frameOfCreation) - yPos);
+        }
       }
+      if(tileSheet.detectCloneLavaCollision(this))
+        dead = true;
     }
   }
   
   void drawClone()
   {    
-    beginShape();
-    pushMatrix();
-    translate(xPos,yPos);
-    rotate(currentAngle);
-    image(img[currentFrame],0,0);
-    popMatrix();
-    endShape();    
+    if(!dead)
+    {
+      beginShape();
+      pushMatrix();
+      translate(xPos,yPos);
+      rotate(currentAngle);
+      image(img[currentFrame],0,0);
+      popMatrix();
+      endShape();  
+    }  
   }
   
   void drawClone(PGraphics pg)  //draw clone to an offscreen image buffer
   {
-    pg.stroke(STROKE);
-    pg.fill(FILL);
-    pg.rect(xPos,yPos,objWidth,objHeight);
+    if(!dead)
+    {
+      pg.stroke(STROKE);
+      pg.fill(FILL);
+      pg.rect(xPos,yPos,objWidth,objHeight);
+    }
   }
 }

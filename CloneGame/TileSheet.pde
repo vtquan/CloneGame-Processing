@@ -129,6 +129,74 @@ class TileSheet{
     return result;
   }
   
+  boolean detectCloneLavaCollision(Clone clone)  //check if clone collide with lava
+  {
+    boolean result = false;
+    LavaTile lavaTile = new LavaTile();
+    
+    pg.beginDraw();
+    pg.background(255);
+    
+    //find current tile position
+    int cCol = int(map(clone.xPos / tileWidth, 0, tileSheet[0].length, 1, tileSheet[0].length-1));
+    int cRow = int(map(clone.yPos / tileHeight, 0, tileSheet.length, 1, tileSheet.length-1));
+    
+    //display surrounding tiles
+    for(int i = cRow-1; i < cRow+2; i++)  //for each row
+    {
+      for(int j = cCol-1; j < cCol+2; j++)  //for each columns
+      {
+        tileSheet[i][j].display(pg);
+      }
+    }
+        
+    //checking the 4 corner of the player to see if the pixel is not the same as SurfaceTile
+    if(pg.get(clone.xPos - int(clone.objWidth/2), clone.yPos - int(clone.objHeight/2)) == lavaTile.FILL)  //check top left corner of player
+    {
+      //find current tile position
+      int xPos = clone.xPos - int(clone.objWidth/2); 
+      int yPos = clone.yPos - int(clone.objHeight/2);
+      int col = xPos / lavaTile.objWidth;
+      int row = yPos / lavaTile.objHeight;
+      
+      tileSheet[row][col].cloneCollisionAction(clone);
+    }
+    else if(pg.get(clone.xPos - int(clone.objWidth/2), clone.yPos + int(clone.objHeight/2)) == lavaTile.FILL)  //check top right corner of player
+    {
+      //find current tile position
+      int xPos = clone.xPos - int(clone.objWidth/2); 
+      int yPos = clone.yPos + int(clone.objHeight/2);
+      int col = xPos / lavaTile.objWidth;
+      int row = yPos / lavaTile.objHeight;
+      
+      tileSheet[row][col].cloneCollisionAction(clone);
+    }
+    else if(pg.get(clone.xPos + int(clone.objWidth/2), clone.yPos - int(clone.objHeight/2)) == lavaTile.FILL)  //check bottom left corner of player
+    {
+      //find current tile position
+      int xPos = clone.xPos + int(clone.objWidth/2); 
+      int yPos = clone.yPos - int(clone.objHeight/2);
+      int col = xPos / lavaTile.objWidth;
+      int row = yPos / lavaTile.objHeight;
+      
+      tileSheet[row][col].cloneCollisionAction(clone);
+    }
+    else if(pg.get(clone.xPos + int(clone.objWidth/2), clone.yPos + int(clone.objHeight/2)) == lavaTile.FILL)  //check bottom right corner of player
+    {
+      //find current tile position
+      int xPos = clone.xPos + int(clone.objWidth/2); 
+      int yPos = clone.yPos + int(clone.objHeight/2);
+      int col = xPos / lavaTile.objWidth;
+      int row = yPos / lavaTile.objHeight;
+      
+      tileSheet[row][col].cloneCollisionAction(clone);
+    }
+    
+    pg.endDraw();
+    
+    return result;
+  }
+  
   
 }
 

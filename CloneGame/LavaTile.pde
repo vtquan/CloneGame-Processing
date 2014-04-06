@@ -7,7 +7,7 @@ class LavaTile extends Tile {
   int coolFrame;
   boolean cool = false;
   boolean coolingState = true;
-  float cooledTime = 2.5;  //how long lava remain cooled in second
+  float cooledTime = 1;  //how long lava remain cooled in second
   
   LavaTile()
   {
@@ -41,7 +41,7 @@ class LavaTile extends Tile {
       if(coolingState)
       {
         currentAlpha--;
-        if(currentAlpha <= 30)
+        if(currentAlpha <= 30)  //Hard to tell the difference in transparency pass 30
         {
           cool = true;
           coolFrame = frameCount;
@@ -75,6 +75,15 @@ class LavaTile extends Tile {
       burn.trigger();
       game.end = true;
       game.endFrame = frameCount;
+    }
+  }
+  
+  void cloneCollisionAction(Clone clone)  //action to take when clone collided
+  {
+    if(!cool)
+    {
+      burn.trigger();
+      clone.dead = true;
     }
   }
 }
