@@ -1,11 +1,13 @@
 class TileSheet{
+  int tileWidth;
+  int tileHeight;
   int[][] tileSheetVisual = {   {0,0,0,0,0,0,0,0,0,0,0,0},
                                 {0,0,0,0,0,0,0,0,0,0,0,0},
                                 {0,0,1,0,0,0,0,0,1,0,0,0},
-                                {0,0,1,0,0,0,0,0,1,0,0,0},
-                                {0,0,1,0,0,0,0,0,1,0,0,0},
-                                {0,0,1,0,0,0,0,0,1,0,0,0},
-                                {0,0,1,0,3,0,0,0,1,0,0,0},
+                                {0,0,0,3,0,0,3,3,0,0,0,0},
+                                {0,0,0,0,0,0,0,0,0,0,0,0},
+                                {0,0,0,0,0,0,0,0,0,0,0,0},
+                                {0,0,1,0,3,3,0,0,0,0,0,0},
                                 {0,0,0,0,0,0,0,0,1,0,0,0},
                                 {0,0,0,0,0,0,0,0,0,0,0,0},
                                 {0,0,0,0,0,0,0,0,0,0,0,0}  };
@@ -15,23 +17,23 @@ class TileSheet{
   TileSheet()
   {
     tileSheet = new Tile[tileSheetVisual.length][tileSheetVisual[0].length];
-    int objWidth = width/tileSheet[0].length;  
-    int objHeight = height/tileSheet.length;
-    int posX = objWidth/2;
-    int posY = objHeight/2;
+    tileWidth = width/tileSheet[0].length;  
+    tileHeight = height/tileSheet.length;
+    int posX = tileWidth/2;
+    int posY = tileHeight/2;
     for(int i = 0; i < tileSheet.length; i++)  //for each row
     {
       for(int j = 0; j < tileSheet[0].length; j++)  //for each columns
       {
         switch(tileSheetVisual[i][j]) {
         case 0: 
-          tileSheet[i][j] = new SurfaceTile(posX + (objWidth*j), posY + (objHeight*i), objWidth, objHeight);
+          tileSheet[i][j] = new SurfaceTile(posX + (tileWidth*j), posY + (tileHeight*i), tileWidth, tileHeight);
           break;
         case 1: 
-          tileSheet[i][j] = new BlockTile(posX + (objWidth*j), posY + (objHeight*i), objWidth, objHeight);
+          tileSheet[i][j] = new BlockTile(posX + (tileWidth*j), posY + (tileHeight*i), tileWidth, tileHeight);
           break;
         default:
-          tileSheet[i][j] = new LavaTile(posX + (objWidth*j), posY + (objHeight*i), objWidth, objHeight);
+          tileSheet[i][j] = new LavaTile(posX + (tileWidth*j), posY + (tileHeight*i), tileWidth, tileHeight);
           break;
         } 
       }
@@ -49,10 +51,18 @@ class TileSheet{
     }
   }
   
+  int checkCurrentTilePositionType(int x, int y)  //find the type of the tile that the object is on
+  {
+    int cCol = int(map(x / tileWidth, 0, tileSheet[0].length, 1, tileSheet[0].length-1));
+    int cRow = int(map(y / tileHeight, 0, tileSheet.length, 1, tileSheet.length-1));
+    
+    return tileSheetVisual[cRow][cCol];
+  }
+  
   boolean detectCollision()
   {
     boolean result = false;
-    Tile surfaceTile = tileSheet[0][0];
+    SurfaceTile surfaceTile = new SurfaceTile();
     
     pg.beginDraw();
     pg.background(255);
@@ -60,8 +70,8 @@ class TileSheet{
     //find current tile position
     int cPosX = player.posX;
     int cPosY = player.posY;
-    int cCol = int(map(cPosX / surfaceTile.objWidth,0,tileSheet[0].length, 1, tileSheet[0].length-1));
-    int cRow = int(map(cPosY / surfaceTile.objHeight,0,tileSheet.length, 1, tileSheet.length-1));
+    int cCol = int(map(cPosX / tileWidth, 0, tileSheet[0].length, 1, tileSheet[0].length-1));
+    int cRow = int(map(cPosY / tileHeight, 0, tileSheet.length, 1, tileSheet.length-1));
     
     //display surrounding tiles
     for(int i = cRow-1; i < cRow+2; i++)  //for each row

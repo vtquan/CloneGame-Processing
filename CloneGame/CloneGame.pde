@@ -15,7 +15,9 @@ void setup()
   minim = new Minim(this);
   groove = minim.loadFile("Circumspection.mp3");
   burn = minim.loadSample("SoundEffects/Burn.wav");
-  burn = minim.loadSample("SoundEffects/Explosion.wav");
+  explosion = minim.loadSample("SoundEffects/Explosion.wav");
+  thruster = minim.loadSample("SoundEffects/Thruster.wav");
+  pickup = minim.loadSample("SoundEffects/Pickup.wav");
   groove.play();
 }
 
@@ -61,12 +63,14 @@ void draw()
     
     if(target.detectCollision(player))
     {
+      pickup.trigger();
       game.score++;
-      target = new Target(int(random(width)),int(random(height)),10,10);
+      target = new Target();
     }
     
     if(cloneMap.detectCollision(player))
     {
+      explosion.trigger();
       game.end = true;
       game.endFrame = frameCount;
     }

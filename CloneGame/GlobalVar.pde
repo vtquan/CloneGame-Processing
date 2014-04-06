@@ -10,6 +10,7 @@ AudioPlayer groove;
 AudioSample burn;
 AudioSample explosion;
 AudioSample thruster;
+AudioSample pickup;
 
 Game game;
 TileSheet tileSheet;

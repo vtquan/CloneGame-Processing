@@ -42,7 +42,7 @@ class LavaTile extends Tile {
       if(coolingState)
       {
         currentAlpha--;
-        if(currentAlpha <= 0)
+        if(currentAlpha <= 30)
         {
           cool = true;
           coolFrame = frameCount;
