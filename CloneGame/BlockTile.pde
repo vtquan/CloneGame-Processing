@@ -1,4 +1,4 @@
-class BlockTile extends Tile {
+class BlockTile extends Tile {  
   BlockTile()
   {
     super(color(255), color(128,128,128));
@@ -11,26 +11,19 @@ class BlockTile extends Tile {
   
   void collisionAction()
   {
-    int posX = player.posX;
-    int posY = player.posY;
-    
-    if(posX < this.posX && posY > this.posY - this.objHeight/2 && posY < this.posY + this.objHeight/2)
+    if(player.posX < this.posX && player.posY > this.posY - this.objHeight/2 && player.posY < this.posY + this.objHeight/2)  //player is left of tile
     {
       player.posX = this.posX - this.objWidth/2 - player.objWidth/2;
     }
-    else if(posX > this.posX && posY > this.posY - this.objHeight/2 && posY < this.posY + this.objHeight/2)
+    else if(player.posX > this.posX && player.posY > this.posY - this.objHeight/2 && player.posY < this.posY + this.objHeight/2)  //player is right of tile
     {
       player.posX = this.posX + this.objWidth/2 + player.objWidth/2;
     }
- 
-    posX = player.posX;
-    posY = player.posY;
-
-    if(posY < this.posY && posX > this.posX - this.objWidth/2 && posX < this.posX + this.objWidth/2)
+    else if(player.posY < this.posY && player.posX > this.posX - this.objWidth/2 && player.posX < this.posY + this.objWidth/2)  //player is top of tile
     {
       player.posY = this.posY - this.objHeight/2 - player.objHeight/2;
     }
-    else if(posY > this.posY && posX > this.posX - this.objWidth/2 && posX < this.posX + this.objWidth/2)
+    else if(player.posY > this.posY && player.posX > this.posX - this.objWidth/2 && player.posX < this.posY + this.objWidth/2)  //player is bottom of tile
     {
       player.posY = this.posY + this.objHeight/2 + player.objHeight/2;
     }

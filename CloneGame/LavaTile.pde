@@ -3,7 +3,6 @@ class LavaTile extends Tile {
   PImage[] coolImg = new PImage[4];
   int currentFrame = int(random(0,45));
   int coolImageIndex = int(random(0,4));
-  int currentTint = int(random(0,256));
   int currentAlpha = int(random(0,256));
   int coolFrame;
   boolean cool = false;

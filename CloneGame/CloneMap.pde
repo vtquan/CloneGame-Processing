@@ -16,7 +16,7 @@ class CloneMap{
     numClone++;
   }
   
-  void updateMap(HashMap<Integer,Integer> savedPosX, HashMap<Integer,Integer> savedPosY)
+  void updateMap()
   {
     for (int i = 0; i < numClone; i++)
     {

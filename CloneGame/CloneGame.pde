@@ -13,7 +13,7 @@ void setup()
   imageMode(CENTER);
     
   minim = new Minim(this);
-  groove = minim.loadFile("Circumspection.mp3");
+  groove = minim.loadFile("Music/Circumspection.mp3");
   burn = minim.loadSample("SoundEffects/Burn.wav");
   explosion = minim.loadSample("SoundEffects/Explosion.wav");
   thruster = minim.loadSample("SoundEffects/Thruster.wav");
@@ -53,7 +53,7 @@ void draw()
   {
     if(game.end)
       game.reset();
-    cloneMap.updateMap(player.savedPosX, player.savedPosY);
+    cloneMap.updateMap();
     cloneMap.drawMap();
     
     target.drawTarget();

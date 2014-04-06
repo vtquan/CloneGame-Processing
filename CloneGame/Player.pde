@@ -45,7 +45,7 @@ class Player{
     
     posX += deltaX;
     posY += deltaY;
-
+    
     // Check borders
     if (posX < objWidth/2)
     {

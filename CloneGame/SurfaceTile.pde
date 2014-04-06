@@ -1,4 +1,4 @@
-class SurfaceTile extends Tile {  
+class SurfaceTile extends Tile {
   SurfaceTile()
   {
     super(color(255), color(255));
