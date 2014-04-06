@@ -1,6 +1,6 @@
 class Clone{
-  int posX;
-  int posY;
+  int xPos;
+  int yPos;
   int objWidth = 10;
   int objHeight = 10;
   final color STROKE = color(72,0,124);
@@ -13,16 +13,16 @@ class Clone{
   
   Clone()
   {
-    posX = 0;
-    posY = 0;
+    xPos = 0;
+    yPos = 0;
     this.frameOfCreation = frameCount;
   }
   
   Clone(Player source)
   {
     this.source = source;
-    this.posX = 0;
-    this.posY = 0;
+    this.xPos = 0;
+    this.yPos = 0;
     this.frameOfCreation = frameCount;
     img[0] = loadImage("Dino/dino1.png");
     img[1] = loadImage("Dino/dino2.png");
@@ -33,9 +33,9 @@ class Clone{
   
   void updateClone()
   {
-    posX = source.savedPosX.get(frameCount - frameOfCreation);
-    posY = source.savedPosY.get(frameCount - frameOfCreation);
-    if(source.savedPosX.get(frameCount+1 - frameOfCreation) - posX != 0 || source.savedPosY.get(frameCount+1 - frameOfCreation) - posY != 0)  //don't animate when staying still
+    xPos = source.savedxPos.get(frameCount - frameOfCreation);
+    yPos = source.savedyPos.get(frameCount - frameOfCreation);
+    if(source.savedxPos.get(frameCount+1 - frameOfCreation) - xPos != 0 || source.savedyPos.get(frameCount+1 - frameOfCreation) - yPos != 0)  //don't animate when staying still
     {
       if(frameCount % int(frameRate/4) == 0)  
         currentFrame = ++currentFrame % img.length;
@@ -44,12 +44,12 @@ class Clone{
     //change rotation
     if(!game.end)
     {
-      if(source.savedPosX.get(frameCount+1 - frameOfCreation) - posX != 0 || source.savedPosY.get(frameCount+1 - frameOfCreation) - posY != 0)  //don't rotate when staying still
+      if(source.savedxPos.get(frameCount+1 - frameOfCreation) - xPos != 0 || source.savedyPos.get(frameCount+1 - frameOfCreation) - yPos != 0)  //don't rotate when staying still
       {
         if(frameCount - frameOfCreation == 0)
-          currentAngle = atan2(source.savedPosX.get(frameCount+1 - frameOfCreation) - posX, posY - source.savedPosY.get(frameCount+1 - frameOfCreation));
+          currentAngle = atan2(source.savedxPos.get(frameCount+1 - frameOfCreation) - xPos, yPos - source.savedyPos.get(frameCount+1 - frameOfCreation));
         else
-          currentAngle = atan2(posX - source.savedPosX.get(frameCount-1 - frameOfCreation), source.savedPosY.get(frameCount-1 - frameOfCreation) - posY);
+          currentAngle = atan2(xPos - source.savedxPos.get(frameCount-1 - frameOfCreation), source.savedyPos.get(frameCount-1 - frameOfCreation) - yPos);
       }
     }
   }
@@ -58,7 +58,7 @@ class Clone{
   {    
     beginShape();
     pushMatrix();
-    translate(posX,posY);
+    translate(xPos,yPos);
     rotate(currentAngle);
     image(img[currentFrame],0,0);
     popMatrix();
@@ -69,6 +69,6 @@ class Clone{
   {
     pg.stroke(STROKE);
     pg.fill(FILL);
-    pg.rect(posX,posY,objWidth,objHeight);
+    pg.rect(xPos,yPos,objWidth,objHeight);
   }
 }

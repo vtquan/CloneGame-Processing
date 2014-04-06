@@ -4,9 +4,9 @@ class SurfaceTile extends Tile {
     super(color(255), color(255));
   }
   
-  SurfaceTile(int posX, int posY, int objWidth, int objHeight)
+  SurfaceTile(int xPos, int yPos, int objWidth, int objHeight)
   {
-    super(color(255), color(255), posX, posY, objWidth, objHeight);
+    super(color(255), color(255), xPos, yPos, objWidth, objHeight);
   }
   
   void collisionAction()

@@ -19,21 +19,21 @@ class TileSheet{
     tileSheet = new Tile[tileSheetVisual.length][tileSheetVisual[0].length];
     tileWidth = width/tileSheet[0].length;  
     tileHeight = height/tileSheet.length;
-    int posX = tileWidth/2;
-    int posY = tileHeight/2;
+    int xPos = tileWidth/2;
+    int yPos = tileHeight/2;
     for(int i = 0; i < tileSheet.length; i++)  //for each row
     {
       for(int j = 0; j < tileSheet[0].length; j++)  //for each columns
       {
         switch(tileSheetVisual[i][j]) {
         case 0: 
-          tileSheet[i][j] = new SurfaceTile(posX + (tileWidth*j), posY + (tileHeight*i), tileWidth, tileHeight);
+          tileSheet[i][j] = new SurfaceTile(xPos + (tileWidth*j), yPos + (tileHeight*i), tileWidth, tileHeight);
           break;
         case 1: 
-          tileSheet[i][j] = new BlockTile(posX + (tileWidth*j), posY + (tileHeight*i), tileWidth, tileHeight);
+          tileSheet[i][j] = new BlockTile(xPos + (tileWidth*j), yPos + (tileHeight*i), tileWidth, tileHeight);
           break;
         default:
-          tileSheet[i][j] = new LavaTile(posX + (tileWidth*j), posY + (tileHeight*i), tileWidth, tileHeight);
+          tileSheet[i][j] = new LavaTile(xPos + (tileWidth*j), yPos + (tileHeight*i), tileWidth, tileHeight);
           break;
         } 
       }
@@ -68,10 +68,10 @@ class TileSheet{
     pg.background(255);
     
     //find current tile position
-    int cPosX = player.posX;
-    int cPosY = player.posY;
-    int cCol = int(map(cPosX / tileWidth, 0, tileSheet[0].length, 1, tileSheet[0].length-1));
-    int cRow = int(map(cPosY / tileHeight, 0, tileSheet.length, 1, tileSheet.length-1));
+    int cxPos = player.xPos;
+    int cyPos = player.yPos;
+    int cCol = int(map(cxPos / tileWidth, 0, tileSheet[0].length, 1, tileSheet[0].length-1));
+    int cRow = int(map(cyPos / tileHeight, 0, tileSheet.length, 1, tileSheet.length-1));
     
     //display surrounding tiles
     for(int i = cRow-1; i < cRow+2; i++)  //for each row
@@ -83,43 +83,43 @@ class TileSheet{
     }
         
     //checking the 4 corner of the player to see if the pixel is not the same as SurfaceTile
-    if(pg.get(player.posX - int(player.objWidth/2), player.posY - int(player.objHeight/2)) != surfaceTile.FILL)  //check top left corner of player
+    if(pg.get(player.xPos - int(player.objWidth/2), player.yPos - int(player.objHeight/2)) != surfaceTile.FILL)  //check top left corner of player
     {
       //find current tile position
-      int posX = player.posX - int(player.objWidth/2); 
-      int posY = player.posY - int(player.objHeight/2);
-      int col = posX / surfaceTile.objWidth;
-      int row = posY / surfaceTile.objHeight;
+      int xPos = player.xPos - int(player.objWidth/2); 
+      int yPos = player.yPos - int(player.objHeight/2);
+      int col = xPos / surfaceTile.objWidth;
+      int row = yPos / surfaceTile.objHeight;
       
       tileSheet[row][col].collisionAction();
     }
-    else if(pg.get(player.posX - int(player.objWidth/2), player.posY + int(player.objHeight/2)) != surfaceTile.FILL)  //check top right corner of player
+    else if(pg.get(player.xPos - int(player.objWidth/2), player.yPos + int(player.objHeight/2)) != surfaceTile.FILL)  //check top right corner of player
     {
       //find current tile position
-      int posX = player.posX - int(player.objWidth/2); 
-      int posY = player.posY + int(player.objHeight/2);
-      int col = posX / surfaceTile.objWidth;
-      int row = posY / surfaceTile.objHeight;
+      int xPos = player.xPos - int(player.objWidth/2); 
+      int yPos = player.yPos + int(player.objHeight/2);
+      int col = xPos / surfaceTile.objWidth;
+      int row = yPos / surfaceTile.objHeight;
       
       tileSheet[row][col].collisionAction();
     }
-    else if(pg.get(player.posX + int(player.objWidth/2), player.posY - int(player.objHeight/2)) != surfaceTile.FILL)  //check bottom left corner of player
+    else if(pg.get(player.xPos + int(player.objWidth/2), player.yPos - int(player.objHeight/2)) != surfaceTile.FILL)  //check bottom left corner of player
     {
       //find current tile position
-      int posX = player.posX + int(player.objWidth/2); 
-      int posY = player.posY - int(player.objHeight/2);
-      int col = posX / surfaceTile.objWidth;
-      int row = posY / surfaceTile.objHeight;
+      int xPos = player.xPos + int(player.objWidth/2); 
+      int yPos = player.yPos - int(player.objHeight/2);
+      int col = xPos / surfaceTile.objWidth;
+      int row = yPos / surfaceTile.objHeight;
       
       tileSheet[row][col].collisionAction();
     }
-    else if(pg.get(player.posX + int(player.objWidth/2), player.posY + int(player.objHeight/2)) != surfaceTile.FILL)  //check bottom right corner of player
+    else if(pg.get(player.xPos + int(player.objWidth/2), player.yPos + int(player.objHeight/2)) != surfaceTile.FILL)  //check bottom right corner of player
     {
       //find current tile position
-      int posX = player.posX + int(player.objWidth/2); 
-      int posY = player.posY + int(player.objHeight/2);
-      int col = posX / surfaceTile.objWidth;
-      int row = posY / surfaceTile.objHeight;
+      int xPos = player.xPos + int(player.objWidth/2); 
+      int yPos = player.yPos + int(player.objHeight/2);
+      int col = xPos / surfaceTile.objWidth;
+      int row = yPos / surfaceTile.objHeight;
       
       tileSheet[row][col].collisionAction();
     }
@@ -128,5 +128,7 @@ class TileSheet{
     
     return result;
   }
+  
+  
 }
 

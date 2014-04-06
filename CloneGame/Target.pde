@@ -1,6 +1,6 @@
 class Target {
-  int posX;
-  int posY;
+  int xPos;
+  int yPos;
   int objWidth;
   int objHeight;
   final color STROKE = color(255,199,0);
@@ -9,26 +9,26 @@ class Target {
   Target()
   {
     SurfaceTile surfaceTile = new SurfaceTile();
-    this.posX = int(random(width));
-    this.posY = int(random(height));
-    int col = posX / tileSheet.tileSheet[0][0].objWidth;
-    int row = posY / tileSheet.tileSheet[0][0].objHeight;
+    this.xPos = int(random(width));
+    this.yPos = int(random(height));
+    int col = xPos / tileSheet.tileSheet[0][0].objWidth;
+    int row = yPos / tileSheet.tileSheet[0][0].objHeight;
 
     while(tileSheet.tileSheetVisual[row][col] != 0)  //prevent unreachable target
     {
-      this.posX = int(random(width));
-      this.posY = int(random(height));
-      col = posX / surfaceTile.objWidth;
-      row = posY / surfaceTile.objHeight;
+      this.xPos = int(random(width));
+      this.yPos = int(random(height));
+      col = xPos / surfaceTile.objWidth;
+      row = yPos / surfaceTile.objHeight;
     }
     this.objWidth = 10;
     this.objHeight = 10;
   }
   
-  Target(int posX,int posY,int objWidth,int objHeight)
+  Target(int xPos,int yPos,int objWidth,int objHeight)
   {
-    this.posX = posX;
-    this.posY = posY;
+    this.xPos = xPos;
+    this.yPos = yPos;
     this.objWidth = objWidth;
     this.objHeight = objHeight;
   }
@@ -37,7 +37,7 @@ class Target {
   {
     stroke(STROKE);
     fill(FILL);
-    rect(posX,posY,objWidth,objHeight);
+    rect(xPos,yPos,objWidth,objHeight);
   }
   
   void drawTarget(PGraphics pg)  //draw clone to an offscreen image buffer
@@ -45,7 +45,7 @@ class Target {
     pg.rectMode(CENTER);
     pg.stroke(STROKE);
     pg.fill(FILL);
-    pg.rect(posX,posY,objWidth,objHeight);
+    pg.rect(xPos,yPos,objWidth,objHeight);
   }
   
   boolean detectCollision(Player player)
@@ -58,19 +58,19 @@ class Target {
     target.drawTarget(pg);
     
     //checking the 4 corner of the player to see if the pixel is not the same as background
-    if(pg.get(player.posX - int(player.objWidth/2), player.posY - int(player.objHeight/2)) == FILL)  //check top left corner of player
+    if(pg.get(player.xPos - int(player.objWidth/2), player.yPos - int(player.objHeight/2)) == FILL)  //check top left corner of player
     {
       result = true;
     }
-    else if(pg.get(player.posX - int(player.objWidth/2), player.posY + int(player.objHeight/2)) == FILL)  //check top right corner of player
+    else if(pg.get(player.xPos - int(player.objWidth/2), player.yPos + int(player.objHeight/2)) == FILL)  //check top right corner of player
     {
       result = true;
     }
-    else if(pg.get(player.posX + int(player.objWidth/2), player.posY - int(player.objHeight/2)) == FILL)  //check bottom left corner of player
+    else if(pg.get(player.xPos + int(player.objWidth/2), player.yPos - int(player.objHeight/2)) == FILL)  //check bottom left corner of player
     {
       result = true;
     }
-    else if(pg.get(player.posX + int(player.objWidth/2), player.posY + int(player.objHeight/2)) == FILL)  //check bottom right corner of player
+    else if(pg.get(player.xPos + int(player.objWidth/2), player.yPos + int(player.objHeight/2)) == FILL)  //check bottom right corner of player
     {
       result = true;
     }

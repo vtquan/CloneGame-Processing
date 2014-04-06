@@ -1,6 +1,6 @@
 class Tile {
-  int posX;
-  int posY;
+  int xPos;
+  int yPos;
   int objWidth;
   int objHeight;
   final color STROKE;
@@ -11,8 +11,8 @@ class Tile {
   {
     STROKE = color(0);
     FILL = color(0);
-    posX = 0;
-    posY = 0;
+    xPos = 0;
+    yPos = 0;
     objWidth = 50;
     objHeight = 50;
   }
@@ -21,18 +21,18 @@ class Tile {
   {
     STROKE = stroke;
     FILL = fill;
-    posX = 0;
-    posY = 0;
+    xPos = 0;
+    yPos = 0;
     objWidth = 50;
     objHeight = 50;
   }
   
-  Tile(color stroke, color fill, int posX, int posY, int objWidth, int objHeight)
+  Tile(color stroke, color fill, int xPos, int yPos, int objWidth, int objHeight)
   {
     STROKE = stroke;
     FILL = fill;
-    this.posX = posX;
-    this.posY = posY;
+    this.xPos = xPos;
+    this.yPos = yPos;
     this.objWidth = objWidth;
     this.objHeight = objHeight;
   }
@@ -41,14 +41,14 @@ class Tile {
   {
     stroke(STROKE);
     fill(FILL);
-    rect(posX,posY,objWidth,objHeight);
+    rect(xPos,yPos,objWidth,objHeight);
   }
   
   void display(PGraphics pg)
   {
     pg.stroke(STROKE);
     pg.fill(FILL);
-    pg.rect(posX,posY,objWidth,objHeight);
+    pg.rect(xPos,yPos,objWidth,objHeight);
   }
   
   void collisionAction()  //action to take when collided

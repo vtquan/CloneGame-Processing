@@ -1,18 +1,18 @@
 class Player{
   int SPEED = 5;
-  int posX = width/2;
-  int posY = 10;
+  int xPos = width/2;
+  int yPos = 10;
   int objWidth;
   int objHeight;
   final color STROKE = color(51,127,116);
   final color FILL = color(51,127,116);
-  HashMap<Integer,Integer> savedPosX = new HashMap<Integer,Integer>();
-  HashMap<Integer,Integer> savedPosY = new HashMap<Integer,Integer>();
+  HashMap<Integer,Integer> savedxPos = new HashMap<Integer,Integer>();
+  HashMap<Integer,Integer> savedyPos = new HashMap<Integer,Integer>();
   PImage[] img = new PImage[4];
   int currentFrame;
   float currentAngle = PI;
-  int prevX = -1;
-  int prevY = -1;
+  int xPrev = -1;
+  int yPrev = -1;
   
   Player() {
     this.objWidth = 10;
@@ -31,8 +31,8 @@ class Player{
   
   void updatePlayer()
   {
-    prevX = posX;
-    prevY = posY;
+    xPrev = xPos;
+    yPrev = yPos;
     float deltaX = getDeltaX();
     float deltaY = getDeltaY();
     float delta = sqrt(sq(deltaX) + sq(deltaY));    
@@ -43,33 +43,33 @@ class Player{
         deltaY = (deltaY / delta) * SPEED;
     }
     
-    posX += deltaX;
-    posY += deltaY;
+    xPos += deltaX;
+    yPos += deltaY;
     
     // Check borders
-    if (posX < objWidth/2)
+    if (xPos < objWidth/2)
     {
-        posX = objWidth/2;
+        xPos = objWidth/2;
     }
-    else if (posX >= width-1 - objWidth/2)
+    else if (xPos >= width-1 - objWidth/2)
     {
-        posX = width-1 - objWidth/2;
+        xPos = width-1 - objWidth/2;
     }
-    if (posY < objHeight/2)
+    if (yPos < objHeight/2)
     {
-        posY = objHeight/2;
+        yPos = objHeight/2;
     }
-    else if (posY >= height-1 - objHeight/2)
+    else if (yPos >= height-1 - objHeight/2)
     {
-        posY = height-1 - objHeight/2;
+        yPos = height-1 - objHeight/2;
     }
     
     //change rotation
     if(!game.end)
     {
-      if(posX - prevX != 0 || prevY - posY != 0)  //don't rotate when staying still
+      if(xPos - xPrev != 0 || yPrev - yPos != 0)  //don't rotate when staying still
       {
-        currentAngle = atan2(posX - prevX, prevY - posY);
+        currentAngle = atan2(xPos - xPrev, yPrev - yPos);
       }
     }
     
@@ -80,7 +80,7 @@ class Player{
   {
     beginShape();
     pushMatrix();
-    translate(posX,posY);
+    translate(xPos,yPos);
     rotate(currentAngle);
     image(img[currentFrame],0,0);
     popMatrix();
@@ -92,7 +92,7 @@ class Player{
     float deltaX = 0;
     if(mousePressed)
     {
-      deltaX = mouseX - posX;
+      deltaX = mouseX - xPos;
     }
     if(keyPressed)
     {
@@ -110,7 +110,7 @@ class Player{
     float deltaY = 0;
     if(mousePressed)
     {
-      deltaY = mouseY - posY;
+      deltaY = mouseY - yPos;
     }
     if(keyPressed)
     {

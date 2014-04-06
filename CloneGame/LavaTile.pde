@@ -14,9 +14,9 @@ class LavaTile extends Tile {
     super(color(255), color(255,0,0));
   }
   
-  LavaTile(int posX, int posY, int objWidth, int objHeight)
+  LavaTile(int xPos, int yPos, int objWidth, int objHeight)
   {
-    super(color(255), color(255,0,0), posX, posY, objWidth, objHeight);
+    super(color(255), color(255,0,0), xPos, yPos, objWidth, objHeight);
     
     for(int i = 0; i < 45; i++)
     {
@@ -32,11 +32,11 @@ class LavaTile extends Tile {
   
   void display()  //override Tile display 
   {
-    image(coolImg[coolImageIndex],posX,posY,objWidth,objHeight);
+    image(coolImg[coolImageIndex],xPos,yPos,objWidth,objHeight);
     if(!cool)
     {
       tint(255,currentAlpha);
-      image(img[currentFrame],posX,posY,objWidth,objHeight);
+      image(img[currentFrame],xPos,yPos,objWidth,objHeight);
       currentFrame = ++currentFrame % img.length;
       if(coolingState)
       {

@@ -4,14 +4,14 @@ class BlockTile extends Tile {
     super(color(255), color(128,128,128));
   }
   
-  BlockTile(int posX, int posY, int objWidth, int objHeight)
+  BlockTile(int xPos, int yPos, int objWidth, int objHeight)
   {
-    super(color(128,128,128), color(128,128,128), posX, posY, objWidth, objHeight);
+    super(color(128,128,128), color(128,128,128), xPos, yPos, objWidth, objHeight);
   }
   
   void collisionAction()  //action to take when collided
   {
-    player.posX = player.savedPosX.get(game.frameElapsed - 1);
-    player.posY = player.savedPosY.get(game.frameElapsed - 1);
+    player.xPos = player.savedxPos.get(game.frameElapsed - 1);
+    player.yPos = player.savedyPos.get(game.frameElapsed - 1);
   }
 }

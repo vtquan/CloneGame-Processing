@@ -63,19 +63,19 @@ class CloneMap{
     drawMap(pg);
     
     //checking the 4 corner of the player to see if the pixel is not the same as background
-    if(pg.get(player.posX - int(player.objWidth/2), player.posY - int(player.objHeight/2)) == getFill())  //check top left corner of player
+    if(pg.get(player.xPos - int(player.objWidth/2), player.yPos - int(player.objHeight/2)) == getFill())  //check top left corner of player
     {
       result = true;
     }
-    else if(pg.get(player.posX - int(player.objWidth/2), player.posY + int(player.objHeight/2)) == getFill())  //check top right corner of player
+    else if(pg.get(player.xPos - int(player.objWidth/2), player.yPos + int(player.objHeight/2)) == getFill())  //check top right corner of player
     {
       result = true;
     }
-    else if(pg.get(player.posX + int(player.objWidth/2), player.posY - int(player.objHeight/2)) == getFill())  //check bottom left corner of player
+    else if(pg.get(player.xPos + int(player.objWidth/2), player.yPos - int(player.objHeight/2)) == getFill())  //check bottom left corner of player
     {
       result = true;
     }
-    else if(pg.get(player.posX + int(player.objWidth/2), player.posY + int(player.objHeight/2)) == getFill())  //check bottom right corner of player
+    else if(pg.get(player.xPos + int(player.objWidth/2), player.yPos + int(player.objHeight/2)) == getFill())  //check bottom right corner of player
     {
       result = true;
     }
@@ -94,19 +94,19 @@ class CloneMap{
     drawMap(pg);
     
     //checking the 4 corner of the player to see if the pixel is not the same as background
-    if(pg.get(player.posX - int(player.objWidth/2), player.posY - int(player.objHeight/2)) == getFill())  //check top left corner of player
+    if(pg.get(player.xPos - int(player.objWidth/2), player.yPos - int(player.objHeight/2)) == getFill())  //check top left corner of player
     {
       result = true;
     }
-    else if(pg.get(player.posX - int(player.objWidth/2), player.posY + int(player.objHeight/2)) == getFill())  //check top right corner of player
+    else if(pg.get(player.xPos - int(player.objWidth/2), player.yPos + int(player.objHeight/2)) == getFill())  //check top right corner of player
     {
       result = true;
     }
-    else if(pg.get(player.posX + int(player.objWidth/2), player.posY - int(player.objHeight/2)) == getFill())  //check bottom left corner of player
+    else if(pg.get(player.xPos + int(player.objWidth/2), player.yPos - int(player.objHeight/2)) == getFill())  //check bottom left corner of player
     {
       result = true;
     }
-    else if(pg.get(player.posX + int(player.objWidth/2), player.posY + int(player.objHeight/2)) == getFill())  //check bottom right corner of player
+    else if(pg.get(player.xPos + int(player.objWidth/2), player.yPos + int(player.objHeight/2)) == getFill())  //check bottom right corner of player
     {
       result = true;
     }
