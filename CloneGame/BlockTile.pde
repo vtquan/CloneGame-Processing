@@ -1,4 +1,6 @@
 class BlockTile extends Tile {  
+  PImage img = loadImage("Block/block.png");
+  int currentFrame;
   BlockTile()
   {
     super(color(255), color(128,128,128));
@@ -7,6 +9,11 @@ class BlockTile extends Tile {
   BlockTile(int xPos, int yPos, int objWidth, int objHeight)
   {
     super(color(128,128,128), color(128,128,128), xPos, yPos, objWidth, objHeight);
+  }
+  
+  void display()
+  {
+    image(img,xPos,yPos,objWidth,objHeight);
   }
   
   void collisionAction()  //action to take when collided
