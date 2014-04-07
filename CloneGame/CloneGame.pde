@@ -25,16 +25,16 @@ void draw()
 {
   background(255);
   tileSheet.display();
-  if(player.yPos > 20 && game.crossed == false)
-  {
-    game.crossed = true;
-    game.startingFrame = frameCount;
-  }
-  else if(player.yPos < 20 && game.crossed == false)
-  {
-    stroke(0);
-    line(0,20,width,20);  //start line for clone to appear
-  }
+//  if(player.yPos > 20 && game.crossed == false)
+//  {
+//    game.crossed = true;
+//    game.startingFrame = frameCount;
+//  }
+//  else if(player.yPos < 20 && game.started == false)
+//  {
+//    stroke(0);
+//    line(0,20,width,20);  //start line for clone to appear
+//  }
     
   if((frameCount > (game.startFrame + 60) && !game.end) || (game.end && frameCount > (game.endFrame + 60)))
   {
@@ -50,7 +50,14 @@ void draw()
     
     if(target.detectCollision(player))
     {
-      cloneMap.addClone();  
+      if(game.started == false)
+      {
+        game.started = true;
+        game.startingFrame = frameCount;
+      }
+      else
+        cloneMap.addClone();  //don't create the clone upon picking up the first target
+        
       pickup.trigger();
       game.score++;
       target = new Target();
@@ -70,7 +77,7 @@ void draw()
     cloneMap.drawMap();
   }
   
-  if(game.crossed && !game.end)
+  if(game.started && !game.end)
   {
     game.frameElapsed = frameCount - game.startingFrame;
     player.savedxPos.put(game.frameElapsed, player.xPos);

@@ -1,5 +1,5 @@
 class Game {
-  boolean crossed = false;
+  boolean started = false;
   boolean end = false;
   int score = 0;
   int startFrame;  //frame number when game start
@@ -17,7 +17,7 @@ class Game {
   {
     startFrame = frameCount;
     endFrame = 0;
-    crossed = false;
+    started = false;
     score = 0;
   }
   
@@ -42,7 +42,7 @@ class Game {
       highSurvival = frameElapsed;
     startFrame = frameCount;
     endFrame = 0;
-    crossed = false;
+    started = false;
     score = 0;
     
     setup();

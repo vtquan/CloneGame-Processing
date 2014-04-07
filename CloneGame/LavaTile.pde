@@ -7,10 +7,10 @@ class LavaTile extends Tile {
   int coolFrame;
   boolean cool = false;
   boolean coolingState = true;
-  float cooledDuration = 1;  //how long lava remain cooled in second
-  float hotDuration = 3;  //how long between cooled period 
+  float cooledDuration = .5;  //how long lava remain cooled in second
+  float hotDuration = 2;  //how long between cooled period 
   int transMinPoint = 30;  //point of transparency where lava is cool
-  int transMaxPoint = 255;  //point of transparency where lava is cooling
+  int transMaxPoint = 250;  //point of transparency where lava is cooling
   
   LavaTile()
   {
