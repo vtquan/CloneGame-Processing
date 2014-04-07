@@ -7,7 +7,10 @@ class LavaTile extends Tile {
   int coolFrame;
   boolean cool = false;
   boolean coolingState = true;
-  float cooledTime = 1;  //how long lava remain cooled in second
+  float cooledDuration = 1;  //how long lava remain cooled in second
+  float hotDuration = 3;  //how long between cooled period 
+  int transMinPoint = 30;  //point of transparency where lava is cool
+  int transMaxPoint = 255;  //point of transparency where lava is cooling
   
   LavaTile()
   {
@@ -40,8 +43,8 @@ class LavaTile extends Tile {
       currentFrame = ++currentFrame % img.length;
       if(coolingState)
       {
-        currentAlpha--;
-        if(currentAlpha <= 30)  //Hard to tell the difference in transparency pass 30
+        currentAlpha -= ((transMaxPoint - transMinPoint)/((hotDuration / 2)*game.FRAMERATE));
+        if(currentAlpha <= transMinPoint)  //Hard to tell the difference in transparency pass 30
         {
           cool = true;
           coolFrame = frameCount;
@@ -49,8 +52,8 @@ class LavaTile extends Tile {
       }
       else
       {
-        currentAlpha++;
-        if(currentAlpha >= 254)
+        currentAlpha += ((transMaxPoint - transMinPoint)/((hotDuration / 2)*game.FRAMERATE));
+        if(currentAlpha >= transMaxPoint)
         {
           coolingState = true;
           coolImageIndex = int(random(0,coolImg.length));
@@ -59,7 +62,7 @@ class LavaTile extends Tile {
     }
     else
     {
-      if(frameCount > (coolFrame+(cooledTime * game.FRAMERATE)))  //lava remain cool for 2.5 seconds
+      if(frameCount > (coolFrame+(cooledDuration * game.FRAMERATE)))  //lava remain cool for cooledDuration seconds
       {
         cool = false;
         coolingState = false;

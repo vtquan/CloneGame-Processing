@@ -50,6 +50,7 @@ void draw()
     
     if(target.detectCollision(player))
     {
+      cloneMap.addClone();  
       pickup.trigger();
       game.score++;
       target = new Target();
@@ -75,11 +76,11 @@ void draw()
     player.savedxPos.put(game.frameElapsed, player.xPos);
     player.savedyPos.put(game.frameElapsed, player.yPos);
     
-    //creating a clone every DELAY frame
-    if((((game.frameElapsed) % 60) == 0) && frameCount >= (game.startingFrame+game.DELAY*game.FRAMERATE))
-    {      
-      cloneMap.addClone();
-    }
+//    //creating a clone every DELAY frame
+//    if((((game.frameElapsed) % 60) == 0) && frameCount >= (game.startingFrame+game.DELAY*game.FRAMERATE))
+//    {      
+//      cloneMap.addClone();
+//    }
   }
   
   game.showScore();

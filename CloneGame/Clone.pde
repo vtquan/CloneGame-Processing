@@ -64,13 +64,11 @@ class Clone{
   {    
     if(!dead)
     {
-      beginShape();
       pushMatrix();
       translate(xPos,yPos);
       rotate(currentAngle);
       image(img[currentFrame],0,0);
       popMatrix();
-      endShape();  
     }  
   }
   

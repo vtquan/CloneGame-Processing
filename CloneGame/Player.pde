@@ -78,13 +78,11 @@ class Player{
   
   void drawPlayer()
   {
-    beginShape();
     pushMatrix();
     translate(xPos,yPos);
     rotate(currentAngle);
     image(img[currentFrame],0,0);
-    popMatrix();
-    endShape();    
+    popMatrix(); 
   }
   
   float getDeltaX()
