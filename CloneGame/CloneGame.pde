@@ -83,11 +83,11 @@ void draw()
     player.savedXPos.put(game.frameElapsed, player.xPos);
     player.savedYPos.put(game.frameElapsed, player.yPos);
     
-//    //creating a clone every DELAY frame
-//    if((((game.frameElapsed) % 60) == 0) && frameCount >= (game.startingFrame+game.DELAY*game.FRAMERATE))
-//    {      
-//      cloneMap.addClone();
-//    }
+    //creating a clone every DELAY frame
+    if((((game.frameElapsed) % 60) == 0) && frameCount >= (game.startingFrame+game.DELAY*game.FRAMERATE))
+    {      
+      cloneMap.addClone();
+    }
   }
   
   game.showScore();
