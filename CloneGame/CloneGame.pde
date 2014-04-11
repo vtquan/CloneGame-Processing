@@ -25,16 +25,16 @@ void draw()
 {
   background(255);
   tileSheet.display();
-//  if(player.yPos > 20 && game.crossed == false)
-//  {
-//    game.crossed = true;
-//    game.startingFrame = frameCount;
-//  }
-//  else if(player.yPos < 20 && game.started == false)
-//  {
-//    stroke(0);
-//    line(0,20,width,20);  //start line for clone to appear
-//  }
+  if(player.yPos > 20 && game.started == false)
+  {
+    game.started = true;
+    game.startingFrame = frameCount;
+  }
+  else if(player.yPos < 20 && game.started == false)
+  {
+    stroke(0);
+    line(0,20,width,20);  //start line for clone to appear
+  }
     
   if((frameCount > (game.startFrame + 60) && !game.end) || (game.end && frameCount > (game.endFrame + 60)))
   {
@@ -80,8 +80,8 @@ void draw()
   if(game.started && !game.end)
   {
     game.frameElapsed = frameCount - game.startingFrame;
-    player.savedxPos.put(game.frameElapsed, player.xPos);
-    player.savedyPos.put(game.frameElapsed, player.yPos);
+    player.savedXPos.put(game.frameElapsed, player.xPos);
+    player.savedYPos.put(game.frameElapsed, player.yPos);
     
 //    //creating a clone every DELAY frame
 //    if((((game.frameElapsed) % 60) == 0) && frameCount >= (game.startingFrame+game.DELAY*game.FRAMERATE))
@@ -92,8 +92,6 @@ void draw()
   
   game.showScore();
 }
-
-
 
 
 

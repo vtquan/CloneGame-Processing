@@ -36,9 +36,9 @@ class Clone{
   {
     if(!dead)
     {
-      xPos = source.savedxPos.get(frameCount - frameOfCreation);
-      yPos = source.savedyPos.get(frameCount - frameOfCreation);
-      if(source.savedxPos.get(frameCount+1 - frameOfCreation) - xPos != 0 || source.savedyPos.get(frameCount+1 - frameOfCreation) - yPos != 0)  //don't animate when staying still
+      xPos = source.savedXPos.get(frameCount - frameOfCreation);
+      yPos = source.savedYPos.get(frameCount - frameOfCreation);
+      if(source.savedXPos.get(frameCount+1 - frameOfCreation) - xPos != 0 || source.savedYPos.get(frameCount+1 - frameOfCreation) - yPos != 0)  //don't animate when staying still
       {
         if(frameCount % int(frameRate/4) == 0)  
           currentFrame = ++currentFrame % img.length;
@@ -47,12 +47,12 @@ class Clone{
       //change rotation
       if(!game.end)
       {
-        if(source.savedxPos.get(frameCount+1 - frameOfCreation) - xPos != 0 || source.savedyPos.get(frameCount+1 - frameOfCreation) - yPos != 0)  //don't rotate when staying still
+        if(source.savedXPos.get(frameCount+1 - frameOfCreation) - xPos != 0 || source.savedYPos.get(frameCount+1 - frameOfCreation) - yPos != 0)  //don't rotate when staying still
         {
           if(frameCount - frameOfCreation == 0)
-            currentAngle = atan2(source.savedxPos.get(frameCount+1 - frameOfCreation) - xPos, yPos - source.savedyPos.get(frameCount+1 - frameOfCreation));
+            currentAngle = atan2(source.savedXPos.get(frameCount+1 - frameOfCreation) - xPos, yPos - source.savedYPos.get(frameCount+1 - frameOfCreation));
           else
-            currentAngle = atan2(xPos - source.savedxPos.get(frameCount-1 - frameOfCreation), source.savedyPos.get(frameCount-1 - frameOfCreation) - yPos);
+            currentAngle = atan2(xPos - source.savedXPos.get(frameCount-1 - frameOfCreation), source.savedYPos.get(frameCount-1 - frameOfCreation) - yPos);
         }
       }
       if(tileSheet.detectCloneLavaCollision(this))

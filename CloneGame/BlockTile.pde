@@ -18,7 +18,7 @@ class BlockTile extends Tile {
   
   void collisionAction()  //action to take when collided
   {
-    player.xPos = player.savedxPos.get(game.frameElapsed - 1);
-    player.yPos = player.savedyPos.get(game.frameElapsed - 1);
+    player.xPos = player.savedXPos.get(game.frameElapsed - 1);
+    player.yPos = player.savedYPos.get(game.frameElapsed - 1);
   }
 }

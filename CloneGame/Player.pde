@@ -6,8 +6,8 @@ class Player{
   int objHeight;
   final color STROKE = color(51,127,116);
   final color FILL = color(51,127,116);
-  HashMap<Integer,Integer> savedxPos = new HashMap<Integer,Integer>();
-  HashMap<Integer,Integer> savedyPos = new HashMap<Integer,Integer>();
+  HashMap<Integer,Integer> savedXPos = new HashMap<Integer,Integer>();
+  HashMap<Integer,Integer> savedYPos = new HashMap<Integer,Integer>();
   PImage[] img = new PImage[4];
   int currentFrame;
   float currentAngle = PI;
