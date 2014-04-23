@@ -40,7 +40,7 @@ class Clone{
       yPos = source.savedYPos.get(frameCount - frameOfCreation);
       if(source.savedXPos.get(frameCount+1 - frameOfCreation) - xPos != 0 || source.savedYPos.get(frameCount+1 - frameOfCreation) - yPos != 0)  //don't animate when staying still
       {
-        if(frameCount % int(frameRate/4) == 0)  
+        if(frameCount % int(frameRate/3) == 0)  
           currentFrame = ++currentFrame % img.length;
       }    
       

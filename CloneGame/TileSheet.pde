@@ -93,7 +93,7 @@ class TileSheet{
       
       tileSheet[row][col].collisionAction();
     }
-    else if(pg.get(player.xPos - int(player.objWidth/2), player.yPos + int(player.objHeight/2)) != surfaceTile.FILL)  //check top right corner of player
+    if(pg.get(player.xPos - int(player.objWidth/2), player.yPos + int(player.objHeight/2)) != surfaceTile.FILL)  //check top right corner of player
     {
       //find current tile position
       int xPos = player.xPos - int(player.objWidth/2); 
@@ -103,7 +103,7 @@ class TileSheet{
       
       tileSheet[row][col].collisionAction();
     }
-    else if(pg.get(player.xPos + int(player.objWidth/2), player.yPos - int(player.objHeight/2)) != surfaceTile.FILL)  //check bottom left corner of player
+    if(pg.get(player.xPos + int(player.objWidth/2), player.yPos - int(player.objHeight/2)) != surfaceTile.FILL)  //check bottom left corner of player
     {
       //find current tile position
       int xPos = player.xPos + int(player.objWidth/2); 
@@ -113,7 +113,7 @@ class TileSheet{
       
       tileSheet[row][col].collisionAction();
     }
-    else if(pg.get(player.xPos + int(player.objWidth/2), player.yPos + int(player.objHeight/2)) != surfaceTile.FILL)  //check bottom right corner of player
+    if(pg.get(player.xPos + int(player.objWidth/2), player.yPos + int(player.objHeight/2)) != surfaceTile.FILL)  //check bottom right corner of player
     {
       //find current tile position
       int xPos = player.xPos + int(player.objWidth/2); 
