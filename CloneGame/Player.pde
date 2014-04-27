@@ -94,9 +94,9 @@ class Player{
     }
     if(keyPressed)
     {
-      if(key == 'd' || key == 'D')
+      if(keyManager.right)
         deltaX += SPEED;
-      if(key == 'a' || key == 'A')
+      if(keyManager.left)
         deltaX += -SPEED;
     }
     
@@ -112,9 +112,9 @@ class Player{
     }
     if(keyPressed)
     {
-      if(key == 's' || key == 'S')
+      if(keyManager.down)
         deltaY += SPEED;
-      if(key == 'w' || key == 'W')
+      if(keyManager.up)
         deltaY += -SPEED;
     }
     

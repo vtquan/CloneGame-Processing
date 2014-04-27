@@ -16,6 +16,7 @@ Game game;
 TileSheet tileSheet;
 Player player;
 Target target;
+KeyManager keyManager;
 CloneMap cloneMap;
 int highScore;  //highest score
 int highSurvival; //highest survival time

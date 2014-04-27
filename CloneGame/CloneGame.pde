@@ -6,6 +6,7 @@ void setup()
   player = new Player(10,10);
   target = new Target();
   cloneMap = new CloneMap(player);
+  keyManager = new KeyManager();
   frameRate(game.FRAMERATE);
   rectMode(CENTER);
   pg = createGraphics(game.GAMEWIDTH,game.GAMEHEIGHT);
@@ -30,7 +31,6 @@ void draw()
     game.started = true;
     game.startingFrame = frameCount;
     game.nextCloneSpawnFrame = frameCount + int(game.cloneDelay * game.FRAMERATE);
-    println(game.nextCloneSpawnFrame);
   }
   else if(player.yPos < 20 && game.started == false)
   {
@@ -91,11 +91,36 @@ void draw()
       cloneMap.addClone();
       
       game.nextCloneSpawnFrame = frameCount + int(game.cloneDelay * game.FRAMERATE);
-      println(game.nextCloneSpawnFrame / 60);
     }
   }
   
   game.showScore();
+}
+
+void keyPressed()
+{
+  if(key == 'd' || key == 'D')
+    keyManager.right = true;
+  if(key == 'a' || key == 'A')
+    keyManager.left = true;
+    
+  if(key == 's' || key == 'S')
+    keyManager.down = true;
+  if(key == 'w' || key == 'W')
+    keyManager.up = true;
+}
+
+void keyReleased()
+{
+  if(key == 'd' || key == 'D')
+    keyManager.right = false;
+  if(key == 'a' || key == 'A')
+    keyManager.left = false;
+    
+  if(key == 's' || key == 'S')
+    keyManager.down = false;
+  if(key == 'w' || key == 'W')
+    keyManager.up = false;
 }
 
 
