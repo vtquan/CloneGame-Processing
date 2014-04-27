@@ -9,8 +9,10 @@ class Clone{
   Player source;  //the player that the clone follow
   PImage[] img = new PImage[4];
   int currentFrame;
-  float currentAngle;
   boolean dead = false;
+  float currentAngle = PI;
+  int xPrev = -1;
+  int yPrev = -1;
   
   Clone()
   {
@@ -36,6 +38,9 @@ class Clone{
   {
     if(!dead)
     {
+      xPrev = xPos;
+      yPrev = yPos;
+      
       xPos = source.savedXPos.get(frameCount - frameOfCreation);
       yPos = source.savedYPos.get(frameCount - frameOfCreation);
       if(source.savedXPos.get(frameCount+1 - frameOfCreation) - xPos != 0 || source.savedYPos.get(frameCount+1 - frameOfCreation) - yPos != 0)  //don't animate when staying still
@@ -47,12 +52,9 @@ class Clone{
       //change rotation
       if(!game.end)
       {
-        if(source.savedXPos.get(frameCount+1 - frameOfCreation) - xPos != 0 || source.savedYPos.get(frameCount+1 - frameOfCreation) - yPos != 0)  //don't rotate when staying still
+        if(xPos - xPrev != 0 || yPrev - yPos != 0)  //don't rotate when staying still
         {
-          if(frameCount - frameOfCreation == 0)
-            currentAngle = atan2(source.savedXPos.get(frameCount+1 - frameOfCreation) - xPos, yPos - source.savedYPos.get(frameCount+1 - frameOfCreation));
-          else
-            currentAngle = atan2(xPos - source.savedXPos.get(frameCount-1 - frameOfCreation), source.savedYPos.get(frameCount-1 - frameOfCreation) - yPos);
+          currentAngle = atan2(xPos - xPrev, yPrev - yPos);
         }
       }
       if(tileSheet.detectCloneLavaCollision(this))

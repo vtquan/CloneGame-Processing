@@ -18,10 +18,17 @@ class BlockTile extends Tile {
   
   void collisionAction()  //action to take when collided
   {
-    if(player.yPos < this.yPos + this.objHeight/2+1 && player.yPos > this.yPos - this.objHeight/2+1)  //player is left or right of block
+    if(player.yPos < this.yPos + this.objHeight/2+1 && player.yPos > this.yPos - this.objHeight/2-1)  //player is left or right of block
       player.xPos = player.savedXPos.get(game.frameElapsed - 1);
       
-    if(player.xPos < this.xPos + this.objWidth/2+1 && player.xPos > this.xPos - this.objWidth/2+1)  //player is top or bottom of block
+    if(player.xPos < this.xPos + this.objWidth/2+1 && player.xPos > this.xPos - this.objWidth/2-1)  //player is top or bottom of block
       player.yPos = player.savedYPos.get(game.frameElapsed - 1);
+      
+//    if(player.xPos == player.savedXPos.get(game.frameElapsed - 1) && player.yPos == player.savedYPos.get(game.frameElapsed - 1))
+//    {
+//      println("Hello");
+//      player.xPos = player.savedXPos.get(game.frameElapsed - 2);
+//      player.yPos = player.savedYPos.get(game.frameElapsed - 2);
+//    }
   }
 }

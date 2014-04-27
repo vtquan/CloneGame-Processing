@@ -94,6 +94,8 @@ void draw()
     }
   }
   
+    Button button = new Button(width/2, height/2, 200, 50, "Hello");
+    button.display();
   game.showScore();
 }
 
