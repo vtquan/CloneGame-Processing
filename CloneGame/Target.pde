@@ -4,7 +4,7 @@ class Target {
   int objWidth;
   int objHeight;
   final color STROKE = color(255,199,0);
-  final color FILL = color(255,199,0);
+  final color FILL = color(186, 47, 184);
   
   Target()
   {
@@ -21,8 +21,8 @@ class Target {
       col = xPos / surfaceTile.objWidth;
       row = yPos / surfaceTile.objHeight;
     }
-    this.objWidth = 10;
-    this.objHeight = 10;
+    this.objWidth = 15;
+    this.objHeight = 15;
   }
   
   Target(int xPos,int yPos,int objWidth,int objHeight)

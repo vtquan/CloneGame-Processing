@@ -21,7 +21,7 @@ class MenuScene extends Scene {
     
     textAlign(CENTER);
     textSize(100);
-    fill(186, 47, 184);
+    fill(255);
     text("Delayed", width/2, 100);
     
     popStyle();
