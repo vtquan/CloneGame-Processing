@@ -18,8 +18,6 @@ void draw()
   
   sceneManager.update();
   sceneManager.display();
- 
-  game.showScore();
 }
 
 void keyPressed()

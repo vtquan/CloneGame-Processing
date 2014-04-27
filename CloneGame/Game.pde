@@ -25,19 +25,6 @@ class Game {
     score = 0;
   }
   
-  void showScore()
-  {
-    textAlign(LEFT);
-    fill(0, 102, 153);
-    textSize(12);
-    text("survival time: "+game.frameElapsed+" score: " +game.score, 10, 10); 
-    
-    textAlign(RIGHT);
-    fill(0, 102, 153);
-    textSize(12);
-    text("highest survival time: "+highSurvival+" highest score: " +highScore, width - 10, 10); 
-  }
-  
   void reset()
   {
     if(score > highScore)

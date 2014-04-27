@@ -29,7 +29,6 @@ class Button {
       if(mousePressed)
       {
         sceneManager.currentScene = new GameScene();
-        ButtonPress = frameCount;
       }
     }
     else

@@ -4,7 +4,7 @@ class MenuScene extends Scene {
   
   MenuScene()
   {
-    groove = minim.loadFile("Music/Circumspection.mp3");
+    groove = minim.loadFile("Music/FantasticA.mp3");
     groove.play();
   }
   
@@ -26,5 +26,18 @@ class MenuScene extends Scene {
     
     popStyle();
     startB.display();
+    
+    showScore();
+  }
+  
+  void showScore()
+  {
+    textAlign(LEFT);
+    fill(255);
+    textSize(18);
+    text("survival time: "+game.frameElapsed+" score: " +game.score, 10, height - 10); 
+    
+    textAlign(RIGHT);
+    text("highest survival time: "+highSurvival+" highest score: " +highScore, width - 10, height - 10); 
   }
 }

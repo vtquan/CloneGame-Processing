@@ -2,15 +2,15 @@ class TileSheet{
   int tileWidth;
   int tileHeight;
   int[][] tileSheetVisual = {   {0,0,0,0,0,0,0,0,0,0,0,0},
-                                {0,0,0,1,1,0,0,0,0,0,0,0},
-                                {0,1,1,1,1,0,0,0,1,3,0,0},
-                                {0,0,1,3,3,0,3,3,1,3,0,0},
-                                {0,0,0,3,0,0,0,0,1,1,3,0},
+                                {0,0,0,4,0,0,0,0,0,4,0,4},
+                                {0,0,1,0,0,0,0,0,0,0,0,4},
+                                {0,0,4,3,0,0,0,0,0,0,0,4},
+                                {0,0,0,4,0,0,0,0,1,4,3,0},
                                 {0,0,0,0,0,0,0,0,0,0,0,0},
-                                {0,0,1,0,3,3,0,0,1,0,0,0},
-                                {0,0,0,0,0,0,0,3,1,0,0,0},
-                                {0,0,0,0,0,0,3,3,1,0,0,0},
-                                {0,0,0,0,0,3,1,1,0,0,0,0}  };
+                                {4,0,0,0,3,0,0,0,1,4,0,0},
+                                {4,0,0,0,0,0,0,3,4,4,0,0},
+                                {4,0,0,0,0,0,4,0,4,0,0,0},
+                                {0,0,4,0,0,3,1,0,0,0,0,4}  };
 
   Tile[][] tileSheet;
   
@@ -31,6 +31,19 @@ class TileSheet{
           break;
         case 1: 
           tileSheet[i][j] = new BlockTile(xPos + (tileWidth*j), yPos + (tileHeight*i), tileWidth, tileHeight);
+          break;
+        case 4:
+          switch(int(random(4))) {
+            case 0: 
+              tileSheet[i][j] = new SurfaceTile(xPos + (tileWidth*j), yPos + (tileHeight*i), tileWidth, tileHeight);
+              break;
+            case 1: 
+              tileSheet[i][j] = new BlockTile(xPos + (tileWidth*j), yPos + (tileHeight*i), tileWidth, tileHeight);
+              break;
+            default:
+              tileSheet[i][j] = new LavaTile(xPos + (tileWidth*j), yPos + (tileHeight*i), tileWidth, tileHeight);
+              break;
+          } 
           break;
         default:
           tileSheet[i][j] = new LavaTile(xPos + (tileWidth*j), yPos + (tileHeight*i), tileWidth, tileHeight);
