@@ -29,7 +29,7 @@ class GameScene extends Scene {
       line(0,20,width,20);  //start line for clone to appear
     }
       
-    if((frameCount > (game.startFrame + 60) && !game.end) || (game.end && frameCount > (game.endFrame + 60)))
+    if((frameCount > (game.startFrame + game.FRAMERATE) && !game.end) || (game.end && frameCount > (game.endFrame + game.FRAMERATE)))
     {
       if(game.end)
         game.reset();

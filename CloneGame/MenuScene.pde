@@ -34,7 +34,7 @@ class MenuScene extends Scene {
   {
     textAlign(LEFT);
     fill(255);
-    textSize(18);
+    textSize(14);
     text("survival time: "+game.frameElapsed+" score: " +game.score, 10, height - 10); 
     
     textAlign(RIGHT);
