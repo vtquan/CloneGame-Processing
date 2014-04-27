@@ -1,8 +1,6 @@
 void setup()
 {
   game = new Game();
-  sceneManager = new SceneManager();
-  keyManager = new KeyManager();
   size(game.GAMEWIDTH,game.GAMEHEIGHT,P3D);
   frameRate(game.FRAMERATE);
   rectMode(CENTER);
@@ -10,12 +8,8 @@ void setup()
   pg.rectMode(CENTER);
   imageMode(CENTER);
   minim = new Minim(this);
-      
-  groove = minim.loadFile("Music/Circumspection.mp3");
-  burn = minim.loadSample("SoundEffects/Burn.wav");
-  explosion = minim.loadSample("SoundEffects/Explosion.wav");
-  thruster = minim.loadSample("SoundEffects/Thruster.wav");
-  pickup = minim.loadSample("SoundEffects/Pickup.wav");
+  sceneManager = new SceneManager();
+  keyManager = new KeyManager();
 }
 
 void draw()
@@ -24,7 +18,6 @@ void draw()
   
   sceneManager.update();
   sceneManager.display();
-    
  
   game.showScore();
 }

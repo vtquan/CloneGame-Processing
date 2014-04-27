@@ -6,6 +6,12 @@ class GameScene extends Scene {
     player = new Player(10,10);
     target = new Target();
     cloneMap = new CloneMap(player);
+      
+    groove = minim.loadFile("Music/Circumspection.mp3");
+    burn = minim.loadSample("SoundEffects/Burn.wav");
+    explosion = minim.loadSample("SoundEffects/Explosion.wav");
+    thruster = minim.loadSample("SoundEffects/Thruster.wav");
+    pickup = minim.loadSample("SoundEffects/Pickup.wav");
     groove.play();
   }
   
