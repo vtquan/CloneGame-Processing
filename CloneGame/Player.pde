@@ -92,13 +92,10 @@ class Player{
     {
       deltaX = mouseX - xPos;
     }
-    if(keyPressed)
-    {
-      if(keyManager.right)
-        deltaX += SPEED;
-      if(keyManager.left)
-        deltaX += -SPEED;
-    }
+    if(keyManager.right)
+      deltaX += SPEED;
+    if(keyManager.left)
+      deltaX += -SPEED;
     
     return deltaX;
   }
@@ -110,13 +107,10 @@ class Player{
     {
       deltaY = mouseY - yPos;
     }
-    if(keyPressed)
-    {
-      if(keyManager.down)
-        deltaY += SPEED;
-      if(keyManager.up)
-        deltaY += -SPEED;
-    }
+    if(keyManager.down)
+      deltaY += SPEED;
+    if(keyManager.up)
+      deltaY += -SPEED;
     
     return deltaY;
   }
