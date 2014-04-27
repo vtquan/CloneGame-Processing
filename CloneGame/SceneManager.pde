@@ -3,7 +3,17 @@ class SceneManager {
   
   SceneManager()
   {
-    currentScene = MenuScene;
+    currentScene = new MenuScene();
+  }
+  
+  void update()
+  {
+    currentScene.update();
+  }
+  
+  void display()
+  {
+    currentScene.display();
   }
 }
   

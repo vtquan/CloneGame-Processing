@@ -1,16 +1,18 @@
 class Button {
-  float xPos;
-  float yPos;
-  float objWidth;
-  float objHeight;
+  int xPos;
+  int yPos;
+  int objWidth;
+  int objHeight;
   final color STROKE = color(0);
   final color FILL = color(255,178,63);
+  final color HOVERFILL = color(255,199,117);
   final int STROKEWEIGHT = 5;
   String txt = "";
   int TEXTSIZE = 24;
   color TEXTCOLOR = color(254);
+  boolean hoverOn = false;
   
-  Button(float xPos, float yPos, float objWidth, float objHeight, String txt)
+  Button(int xPos, int yPos, int objWidth, int objHeight, String txt)
   {
     this.xPos = xPos;
     this.yPos = yPos;
@@ -19,17 +21,36 @@ class Button {
     this.txt = txt;
   }
   
+  void update()
+  {
+    if(mouseX > xPos - objWidth/2 && mouseX < xPos + objWidth/2 && mouseY > yPos - objHeight/2 && mouseY < yPos + objHeight/2)
+      hoverOn = true;    
+    else
+      hoverOn = false;
+  }
+  
   void display()
   {
     pushStyle();
-    textAlign(CENTER);
-    fill(FILL);
+    
+    if(hoverOn)
+    {
+      fill(HOVERFILL);
+    }
+    else
+    {
+      fill(FILL);
+    }
+      
     stroke(STROKE);
     strokeWeight(STROKEWEIGHT);
     rect(xPos, yPos, objWidth, objHeight);
+    
+    textAlign(CENTER);
     textSize(TEXTSIZE);
     fill(0, 102, 153);
     text(txt, xPos, yPos+TEXTSIZE/2);
+    
     popStyle();
   }
 }

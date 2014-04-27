@@ -1,6 +1,7 @@
 void setup()
 {
   game = new Game();
+  sceneManager = new SceneManager();
   size(game.GAMEWIDTH,game.GAMEHEIGHT,P3D);
   tileSheet = new TileSheet();
   player = new Player(10,10);
@@ -93,9 +94,8 @@ void draw()
       game.nextCloneSpawnFrame = frameCount + int(game.cloneDelay * game.FRAMERATE);
     }
   }
-  
-    Button button = new Button(width/2, height/2, 200, 50, "Hello");
-    button.display();
+  sceneManager.update();
+  sceneManager.display();
   game.showScore();
 }
 

@@ -13,6 +13,7 @@ AudioSample thruster;
 AudioSample pickup;
 
 Game game;
+SceneManager sceneManager;
 TileSheet tileSheet;
 Player player;
 Target target;
