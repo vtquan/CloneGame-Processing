@@ -22,3 +22,5 @@ CloneMap cloneMap;
 int highScore;  //highest score
 int highSurvival; //highest survival time
 PGraphics pg;
+
+int ButtonPress;

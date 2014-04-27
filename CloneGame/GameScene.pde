@@ -1,5 +1,13 @@
-class MenuScene extends Scene {
-  Button startB = new Button(width/2, height/2, 100, 40, "Start");
+class GameScene extends Scene {
+  
+  GameScene()
+  {
+    tileSheet = new TileSheet();
+    player = new Player(10,10);
+    target = new Target();
+    cloneMap = new CloneMap(player);
+    groove.play();
+  }
   
   void update()
   {
@@ -20,12 +28,9 @@ class MenuScene extends Scene {
       if(game.end)
         game.reset();
       cloneMap.updateMap();
-      cloneMap.drawMap();
       
-      target.drawTarget();
       player.updatePlayer();
       tileSheet.detectCollision();
-      player.drawPlayer();
       
       if(target.detectCollision(player))
       {
@@ -49,12 +54,6 @@ class MenuScene extends Scene {
         game.endFrame = frameCount;
       }
     }
-    else  //draw everything when game end but do not update them
-    {
-      player.drawPlayer();
-      target.drawTarget();
-      cloneMap.drawMap();
-    }
     
     if(game.started && !game.end)
     {
@@ -70,13 +69,20 @@ class MenuScene extends Scene {
         game.nextCloneSpawnFrame = frameCount + int(game.cloneDelay * game.FRAMERATE);
       }
     }
-    sceneManager.update();
-    sceneManager.display();
-    game.showScore();
   }
   
   void display()
   {
-    startB.display();
+    tileSheet.display();
+    if(player.yPos < 20 && game.started == false)
+    {
+      stroke(0);
+      line(0,20,width,20);  //start line for clone to appear
+    }
+    
+    cloneMap.drawMap();
+    target.drawTarget();
+    player.drawPlayer();
+    game.showScore();
   }
 }

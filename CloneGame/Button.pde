@@ -24,7 +24,14 @@ class Button {
   void update()
   {
     if(mouseX > xPos - objWidth/2 && mouseX < xPos + objWidth/2 && mouseY > yPos - objHeight/2 && mouseY < yPos + objHeight/2)
+    {
       hoverOn = true;    
+      if(mousePressed)
+      {
+        sceneManager.currentScene = new GameScene();
+        ButtonPress = frameCount;
+      }
+    }
     else
       hoverOn = false;
   }

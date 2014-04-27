@@ -48,6 +48,8 @@ class Game {
     endFrame = 0;
     started = false;
     score = 0;
+    groove.pause();
+    groove.rewind();
     
     setup();
   }
